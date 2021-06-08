@@ -31,7 +31,7 @@ exports.adminMiddleware = (req,res,next) => {
 
 exports.sellerMiddleware = (req,res,next) => {
     if(req.user.role !== 'seller'){
-        return res.status(400).json({message : "seller access denied"})
+        return res.status(400).json({message : "hello"})
     }
     next();
 }

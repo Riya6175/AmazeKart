@@ -9,7 +9,7 @@ const authRoutes = require('./routes/auth')
 const adminRoutes = require('./routes/admin/auth')
 const sellerRoutes = require('./routes/seller/auth')
 const categoryRoutes = require('./routes/category')
-
+const productRoutes = require('./routes/product')
 //environment variobles 
 env.config();
 
@@ -35,6 +35,7 @@ app.use('/api',authRoutes)
 app.use('/api',adminRoutes)
 app.use('/api',sellerRoutes)
 app.use("/api",categoryRoutes)
+app.use("/api",productRoutes)
 
 
 app.listen(process.env.PORT, ()=>{

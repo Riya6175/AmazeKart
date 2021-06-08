@@ -2,8 +2,9 @@ import React from "react"
 import {BrowserRouter as Router,Route, Switch} from 'react-router-dom'
 import './App.css';
 import home from "./container/home/home"
-// import signin from "./containers/signin/signin";
-// import signup from "./containers/signup/signup";
+import signin from "./container/signin/signin";
+import signup from "./container/signup/signup";
+import Footer from "./components/footer"
 
 
 function App() {
@@ -12,9 +13,10 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact component={home} />
-          {/* <Route path="/signin" component={signin} />
-          <Route path="/signup" component={signup} /> */}
+          <Route path="/signin" component={signin} />
+          <Route path="/signup" component={signup} />
         </Switch>
+        
       </Router>
     </div>
   );

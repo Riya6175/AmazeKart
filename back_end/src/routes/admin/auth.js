@@ -5,7 +5,6 @@ const app = express();
 const mongoose = require("mongoose");
 const router = express.Router();
 const {signup, signin} = require('../../controller/admin/auth')
-const {sellersignup, sellersignin} = require('../../controller/seller/auth')
 const { validateSignupRequest,validateSigninRequest,isRequestValidated } = require("../../validators/auth");
 
 router.post("/admin/signup",validateSignupRequest,isRequestValidated, signup)
