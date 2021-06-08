@@ -4,8 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+// import IconButton from '@material-ui/core/IconButton';
+// import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from "react-router-dom";
 
 
@@ -40,7 +40,7 @@ export default function ButtonAppBar() {
             {/* <MenuIcon /> */}
             {/* <img src="https://i.postimg.cc/9FngKd9d/header-gray-removebg-preview.png" alt="header" border="0" className={classes.img}/> */}
           <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#fff"}} variant="h6" className={classes.title}>
-            AmazeKart - Admin 
+            AmazeKart - Seller Accout  Grow Your Bussiness. 
           </Typography>
           <Button component={ Link } to="/signin" color="inherit">Login</Button>
           <Button component={ Link } to="/signup" color="inherit" method="POST">Signup</Button>

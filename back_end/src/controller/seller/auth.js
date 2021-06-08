@@ -1,8 +1,8 @@
-const User = require("../models/user");
+const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 
-exports.signup = (req,res) => {
+exports.sellersignup = (req,res) => {
 
     User.findOne({
         email: req.body.email
@@ -22,7 +22,8 @@ exports.signup = (req,res) => {
             lastName, 
             email, 
             password, 
-            username:Math.random().toString()
+            username:Math.random().toString(),
+            role: 'seller'
         })
 
         _user.save((error, data)=>{
@@ -34,21 +35,21 @@ exports.signup = (req,res) => {
 
             if(data){
                 return res.status(201).json({
-                   message: "user created succesfully"
+                   message: "seller created succesfully"
                 })
             }
         })
     })
 }
 
-exports.signin = (req,res)=>{
+exports.sellersignin = (req,res)=>{
     User.findOne({ email: req.body.email })
     .exec((error, user) => {
         if(error){
             return res.status(400).json({error});
         }
         if(user){
-            if(user.authenticate(req.body.password)){
+            if(user.authenticate(req.body.password)&& user.role === 'seller'){
                 const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, { expiresIn: '2h'});
                 const { _id, firstName, lastName, email, role, fullname} = user;
                 res.status(200).json({

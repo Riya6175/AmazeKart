@@ -150,6 +150,13 @@ export default function SignUp() {
               </Link>
             </Grid>
           </Grid>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="#" variant="body3" style={{color:"blue"}}>
+                Want to grow your bussiness? Create a seller account here.
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
       <hr style={{ marginTop: "10%"}}/>
