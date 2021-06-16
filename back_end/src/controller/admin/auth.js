@@ -26,19 +26,20 @@ exports.signup = (req,res) => {
             role: 'admin'
         })
 
-        _user.save((error, data)=>{
+        _user.save((error, data) => {
             if(error){
                 return res.status(400).json({
-                    message:"something wrong"
-                })
+                    message: 'Something went wrong'
+                });
             }
 
             if(data){
                 return res.status(201).json({
-                   message: "Admin created succesfully"
+                    message: 'Admin created Successfully..!'
                 })
             }
-        })
+        });
+
     })
 }
 

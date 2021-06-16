@@ -60,4 +60,4 @@ userSchema.methods = {
         return bcrypt.compareSync(password,this.hash_password);
     }
 }
-module.exports = mongoose.model('user',userSchema);
+module.exports = mongoose.model('User',userSchema);

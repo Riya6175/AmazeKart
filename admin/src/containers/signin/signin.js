@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Layout from "../../components/layout"
+import {login} from "../../actions"
+import {useDispatch} from 'react-redux';
+
+
+/**
+* @author
+* @function Signin
+**/
 
 function Copyright() {
   return (
@@ -52,7 +60,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Signin() {
+export default function Signin(props) {
+
+  const [email,setEmail] = useState("");
+  const [password, setPassword] = useState("")
+  const [error,setError] = useState("")
+
+  const dispatch = useDispatch();
+
+  
+  const userLogin = (e) => {
+
+    e.preventDefault();
+    const user = {
+      email,password
+    }
+
+    dispatch(login(user));
+  }
+    
   const classes = useStyles();
 
   return (
@@ -68,7 +94,7 @@ export default function Signin() {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={userLogin} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -79,6 +105,8 @@ export default function Signin() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value = {email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -91,6 +119,8 @@ export default function Signin() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value = {password}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
           </Grid>

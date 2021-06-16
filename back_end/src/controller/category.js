@@ -24,10 +24,16 @@ function createCategories(categories,parentId = null){
 }
 
 exports.addCategory = (req,res) => {
-
+    
+    
     const categoryObj = {
         name: req.body.name,
         slug: slugify(req.body.name)
+    }
+
+    if(req.file){
+        
+        categoryObj.categoryImage =  process.env.API  + req.file.filename;
     }
 
     if(req.body.parentId){
