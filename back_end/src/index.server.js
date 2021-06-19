@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require("mongoose");
 const path= require("path")
+const cors = require("cors")
 
 //routes
 const authRoutes = require('./routes/auth')
@@ -29,6 +30,8 @@ mongoose.connect(
 ).then(()=>{
     console.log("database connected");
 })
+
+app.use(cors());
 app.use(bodyParser());
 app.use(express.json())
 

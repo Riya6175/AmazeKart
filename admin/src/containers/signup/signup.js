@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Layout from "../../components/layout"
+import{ Redirect } from "react-router-dom"
+import {useDispatch, useSelector} from 'react-redux';
 
 function Copyright() {
   return (
@@ -30,7 +32,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -58,6 +60,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+
+  const auth = useSelector(state => state.auth);
+
+  if(auth.authenticate){
+    return <Redirect to={"/"}/>
+  }
 
   return (
       <Layout>
@@ -159,7 +167,7 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
-      <hr style={{ marginTop: "10%"}}/>
+      <hr style={{ marginTop: "5%"}}/>
       <Box style={{ marginBottom: "10%"}} mt={5}>
         <Copyright />
       </Box>

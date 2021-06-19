@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +15,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Layout from "../../components/layout"
 import {login} from "../../actions"
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+// import { Redirect } from 'react-router';
+import{ Redirect } from "react-router-dom"
+
 
 
 /**
@@ -38,7 +41,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -49,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -65,8 +68,11 @@ export default function Signin(props) {
   const [email,setEmail] = useState("");
   const [password, setPassword] = useState("")
   const [error,setError] = useState("")
+  const auth = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
+
+  
 
   
   const userLogin = (e) => {
@@ -80,7 +86,9 @@ export default function Signin(props) {
   }
     
   const classes = useStyles();
-
+  if(auth.authenticate){
+    return <Redirect to={"/"}/>
+  }
   return (
       <Layout>
 
@@ -120,7 +128,7 @@ export default function Signin(props) {
                 id="password"
                 autoComplete="current-password"
                 value = {password}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
           </Grid>
