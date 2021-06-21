@@ -7,6 +7,9 @@ import signup from "./containers/signup/signup";
 import PrivateRoute from "./components/HOC/PrivateRoute"
 import {useDispatch , useSelector} from "react-redux"
 import { isUserLoggedIn} from "./actions"
+import Products from "./containers/products/products";
+import Orders from "./containers/orders/orders";
+import Sidebar from "./containers/home/sidebar";
 
 function App() {
 
@@ -23,12 +26,14 @@ function App() {
   return (
     <div className="App">
       
+        <Sidebar/>
         <Switch>
-          <PrivateRoute path="/" exact component={home} />
+          {/* <PrivateRoute path="/" exact component={home} /> */}
+          <Route path="/products" render={props => <Products {...props} /> } />
+          <Route path="/orders" render={props => <Orders {...props} /> } />
           <Route path="/signin" component={signin} />
           <Route path="/signup" component={signup} />
         </Switch>
-      
     </div>
   );
 }
