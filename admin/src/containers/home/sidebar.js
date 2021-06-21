@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,11 +16,16 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import {Link} from "react-router-dom";
+import HomeIcon from '@material-ui/icons/Home';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import PersonIcon from '@material-ui/icons/Person';
+import {Link, withRouter} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux"
 import { signout } from '../../actions/auth.actions';
+
+
 
 const drawerWidth = 240;
 
@@ -96,10 +101,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Header() {
+const Sidebar = (props) => {
+  const {history} = props;
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const itemsList = [
+    {
+      text: "Home",
+      icon: <HomeIcon/>,
+      onClick: () => history.push("/")
+    },
+    {
+      text: "Products",
+      icon: <AddBoxIcon/>,
+      onClick: () => history.push("/products")
+    },
+    {
+      text: "Orders",
+      icon: <AddShoppingCartIcon/>,
+      onClick: () => history.push("/orders")
+    }
+  ]
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -128,7 +152,7 @@ export default function Header() {
   const renderLoggedInLinks = () => {
     return (
         <Toolbar>
-            <Button color="inherit" className="buttons" onClick={logout}>Log Out</Button>
+            <Button color="inherit" className="buttons" method="POST" onClick={logout}>Log Out</Button>
         </Toolbar>
       
     )
@@ -154,7 +178,7 @@ export default function Header() {
               [classes.hide]: open,
             })}
           >
-            {/* <MenuIcon /> */}
+            <MenuIcon />
           </IconButton>
           <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#fff"}} variant="h6" className={classes.title}>
             AmazeKart - Admin 
@@ -164,7 +188,86 @@ export default function Header() {
           
         </Toolbar>
       </AppBar>
-      
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+            {/* <ListItem button onClick={() => history.push("/")}>
+              <ListItemIcon>
+                <HomeIcon/>
+              </ListItemIcon>
+              Home
+              <ListItemText/>
+            </ListItem>
+            <ListItem button onClick={() => history.push("/products")}>
+              <ListItemIcon>
+                <AddBoxIcon/>
+              </ListItemIcon>
+              Products
+              <ListItemText/>
+            </ListItem>
+            <ListItem button component={ Link } to="/orders">
+              <ListItemIcon>
+                <AddShoppingCartIcon/>
+              </ListItemIcon>
+              Orders
+              <ListItemText/>
+            </ListItem> */}
+            {itemsList.map((item,index) => {
+              const {text,icon,onClick} = item;
+              return (
+                <ListItem button key={text} onClick={onClick}>
+                    {icon && <ListItemIcon>{icon}</ListItemIcon>}
+                    <ListItemText primary={text} />
+                </ListItem>
+              )
+            })
+            }
+        </List>
+        <Divider />
+        {/* <List>
+            <ListItem button>
+              <ListItemIcon>
+                <PersonIcon/>
+              </ListItemIcon>
+              Profile
+              <ListItemText/>
+            </ListItem>
+            <ListItem button component={ Link } to="/signout">
+              <ListItemIcon>
+                <LockOpenIcon/>
+              </ListItemIcon>
+              LogOut
+              <ListItemText/>
+            </ListItem>
+        </List> */}
+      </Drawer>
+      {/* <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Typography paragraph>
+          hhdscjskd
+        </Typography>
+        <Typography paragraph>
+        </Typography>
+      </main> */}
     </div>
   );
 }
+
+export default withRouter(Sidebar);

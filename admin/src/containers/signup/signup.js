@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import Layout from "../../components/layout"
 import{ Redirect } from "react-router-dom"
 import {useDispatch, useSelector} from 'react-redux';
+import {Signup} from "../../actions"
 
 function Copyright() {
   return (
@@ -32,7 +33,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -61,17 +62,42 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
+  const [firstName, setfirstName] = useState("")
+  const [lastName,setlastName] = useState("")
+  const [email,setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error,setError] = useState("")
+  const dispatch = useDispatch();
+
   const auth = useSelector(state => state.auth);
+  const user = useSelector(state => state.user);
+
+  const userSignup = (e) =>{
+
+    e.preventDefault();
+
+          const user = {
+            firstName, lastName,email, password
+          }
+
+          dispatch(Signup(user))
+  }
 
   if(auth.authenticate){
     return <Redirect to={"/"}/>
   }
+
+  if(user.loading){
+    return <p> loading...!</p>
+  }
+
 
   return (
       <Layout>
 
       
     <Container component="main" maxWidth="xs">
+      {user.message}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar  className={classes.avatar}>
@@ -80,7 +106,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={userSignup}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -91,6 +117,8 @@ export default function SignUp() {
                 fullWidth
                 id="firstName"
                 label="First Name"
+                value={firstName}
+                onChange={(e) => setfirstName(e.target.value) }
                 autoFocus
               />
             </Grid>
@@ -102,6 +130,8 @@ export default function SignUp() {
                 id="lastName"
                 label="Last Name"
                 name="lastName"
+                value={lastName}
+                onChange={(e) => setlastName(e.target.value) }
                 autoComplete="lname"
               />
             </Grid>
@@ -111,6 +141,7 @@ export default function SignUp() {
                     data-cy="user-phone"
                     defaultCountry={"in"}
                     className={classes.phone}
+
                   />
             <Grid item xs={12}>
               <TextField
@@ -121,6 +152,8 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value) }
               />
             </Grid>
             <Grid item xs={12}>
@@ -132,6 +165,8 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value) }
                 autoComplete="current-password"
               />
             </Grid>

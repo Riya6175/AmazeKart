@@ -1,6 +1,7 @@
 import { api } from "../urlConfig";
 import axiosInstance from "../helpers/axios"
 import { authConstants } from "./constants"
+import axios from "axios";
 
 export const login = (user) => {
     console.log(user)
@@ -52,11 +53,25 @@ export const isUserLoggedIn = () => {
     }
 }
 
-export const Signout = () => {
+export const signout = () => {
     return async dispatch => {
-        localStorage.clear();
-        dispatch({
-            type: authConstants.LOGOUT_REQUEST
-        })
+
+        dispatch({type: authConstants.LOGOUT_REQUEST})
+        const res = await axiosInstance.post(`/admin/signout`)
+
+        if(res.status === 200){
+            localStorage.clear();
+            dispatch({
+                type: authConstants.LOGOUT_SUCCESS,
+                payload:{message: "sucess"}
+            })
+        }else{
+            dispatch({
+                type: authConstants.LOGOUT_FAILURE,
+                payload: {error: res.data.error}
+            })
+        }
+        
     }
 }
+
