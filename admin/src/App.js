@@ -10,6 +10,7 @@ import { isUserLoggedIn} from "./actions"
 import Products from "./containers/products/products";
 import Orders from "./containers/orders/orders";
 import Sidebar from "./containers/home/sidebar";
+import Category from "./containers/category/category";
 
 function App() {
 
@@ -28,8 +29,9 @@ function App() {
       
         <Switch>
           <PrivateRoute path="/" exact component={home} />
-          <Route path="/products" render={props => <Products {...props} /> } />
-          <Route path="/orders" render={props => <Orders {...props} /> } />
+          <PrivateRoute path="/products"  component={Products} />
+          <PrivateRoute path="/orders"  component={Orders} />
+          <PrivateRoute path="/category"  component={Category} />
           <Route path="/signin" component={signin} />
           <Route path="/signup" component={signup} />
         </Switch>

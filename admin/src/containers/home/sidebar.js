@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
   },
   buttons:{
     '@media(minWidth: 360px)' : {
@@ -107,23 +107,23 @@ const Sidebar = (props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const itemsList = [
-    {
-      text: "Home",
-      icon: <HomeIcon/>,
-      onClick: () => history.push("/")
-    },
-    {
-      text: "Products",
-      icon: <AddBoxIcon/>,
-      onClick: () => history.push("/products")
-    },
-    {
-      text: "Orders",
-      icon: <AddShoppingCartIcon/>,
-      onClick: () => history.push("/orders")
-    }
-  ]
+  // const itemsList = [
+  //   {
+  //     text: "Home",
+  //     icon: <HomeIcon/>,
+  //     onClick: () => history.push("/")
+  //   },
+  //   {
+  //     text: "Products",
+  //     icon: <AddBoxIcon/>,
+  //     onClick: () => history.push("/products")
+  //   },
+  //   {
+  //     text: "Orders",
+  //     icon: <AddShoppingCartIcon/>,
+  //     onClick: () => history.push("/orders")
+  //   }
+  // ]
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -208,14 +208,14 @@ const Sidebar = (props) => {
         </div>
         <Divider />
         <List>
-            {/* <ListItem button onClick={() => history.push("/")}>
+            <ListItem button component={ Link } to="/">
               <ListItemIcon>
                 <HomeIcon/>
               </ListItemIcon>
               Home
               <ListItemText/>
             </ListItem>
-            <ListItem button onClick={() => history.push("/products")}>
+            <ListItem button component={ Link } to="/products">
               <ListItemIcon>
                 <AddBoxIcon/>
               </ListItemIcon>
@@ -228,8 +228,15 @@ const Sidebar = (props) => {
               </ListItemIcon>
               Orders
               <ListItemText/>
-            </ListItem> */}
-            {itemsList.map((item,index) => {
+            </ListItem>
+            <ListItem button component={ Link } to="/category">
+              <ListItemIcon>
+              <AddBoxIcon/>
+              </ListItemIcon>
+              Category
+              <ListItemText/>
+            </ListItem>
+            {/* {itemsList.map((item,index) => {
               const {text,icon,onClick} = item;
               return (
                 <ListItem button key={text} onClick={onClick}>
@@ -238,10 +245,10 @@ const Sidebar = (props) => {
                 </ListItem>
               )
             })
-            }
+            } */}
         </List>
         <Divider />
-        {/* <List>
+        <List>
             <ListItem button>
               <ListItemIcon>
                 <PersonIcon/>
@@ -256,7 +263,7 @@ const Sidebar = (props) => {
               LogOut
               <ListItemText/>
             </ListItem>
-        </List> */}
+        </List>
       </Drawer>
       {/* <main className={classes.content}>
         <div className={classes.toolbar} />
@@ -270,4 +277,4 @@ const Sidebar = (props) => {
   );
 }
 
-export default withRouter(Sidebar);
+export default Sidebar;
