@@ -19,6 +19,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import PersonIcon from '@material-ui/icons/Person';
 import {Link, withRouter} from "react-router-dom";
@@ -231,21 +232,11 @@ const Sidebar = (props) => {
             </ListItem>
             <ListItem button component={ Link } to="/category">
               <ListItemIcon>
-              <AddBoxIcon/>
+              <PlaylistAddIcon/>
               </ListItemIcon>
               Category
               <ListItemText/>
             </ListItem>
-            {/* {itemsList.map((item,index) => {
-              const {text,icon,onClick} = item;
-              return (
-                <ListItem button key={text} onClick={onClick}>
-                    {icon && <ListItemIcon>{icon}</ListItemIcon>}
-                    <ListItemText primary={text} />
-                </ListItem>
-              )
-            })
-            } */}
         </List>
         <Divider />
         <List>
