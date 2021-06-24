@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Layout from "../../components/layout"
+import{ Redirect } from "react-router-dom"
+import {login} from "../../actions"
 
 function Copyright() {
   return (
@@ -51,8 +54,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Signin() {
+export default function Signin(props) {
   const classes = useStyles();
+
+  const [email,setEmail] = useState("");
+  const [password, setPassword] = useState("")
+  const [error,setError] = useState("")
+  const auth = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
+
+  
+
+  
+  const userLogin = (e) => {
+
+    e.preventDefault();
+    const user = {
+      email,password
+    }
+
+    dispatch(login(user));
+  }
+
+  if(auth.authenticate){
+    return <Redirect to={"/seller"}/>
+  }
 
   return (
       <Layout>
@@ -67,7 +94,7 @@ export default function Signin() {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={userLogin} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -78,6 +105,8 @@ export default function Signin() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value = {email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,6 +119,9 @@ export default function Signin() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value = {password}
+                onChange={(e) => setPassword(e.target.value)}
+
               />
             </Grid>
           </Grid>

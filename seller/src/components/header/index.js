@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from "react-router-dom";
 import Footer from "../footer"
+import {useSelector, useDispatch} from "react-redux"
+import { signout } from '../../actions/auth.actions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +57,29 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
   const classes = useStyles();
 
+  const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch();
+
+  const logout = () => {
+        dispatch(signout());
+  }
+
+  const renderNonLoggedInLinks = () => {
+      return (
+          <Toolbar>
+              <Button component={ Link } to="/signup" color="#1F2937" className={classes.btn1} method="POST">Start Selling</Button>
+          </Toolbar>
+        
+      )
+  }
+  const renderLoggedInLinks = () => {
+    return (
+        <Toolbar>
+            <Button color="inherit" className="buttons" color="#000" method="POST" onClick={logout}>Log Out</Button>
+        </Toolbar>
+      
+    )
+}
   return (
     <div className={classes.root}>
       
@@ -73,11 +98,10 @@ export default function ButtonAppBar() {
              Grow Your Bussiness. 
           </Typography>
           {/* <Button component={ Link } to="/signin" color="#1F2937"  className={classes.btn}>Login</Button> */}
-          <Button component={ Link } to="/signup" color="#1F2937" className={classes.btn1} method="POST">Start Selling</Button>
           
+          {auth.authenticate ? renderLoggedInLinks() : renderNonLoggedInLinks()}
         </Toolbar>
       </AppBar>
-      <Footer/>
     </div>
   );
 }
