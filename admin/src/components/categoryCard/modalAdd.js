@@ -83,11 +83,9 @@ export default function AddCategory() {
     form.append('categoryImage',categoryImage);
 
     dispatch(addCategory(form))
-    // const cat = {
-    //     categoryName,
-    //     parentCategoryId,
-    //     categoryImage
-    // }
+    
+    setCategoryName('');
+    setParentCategoryId('');
 
     
     setOpen(false);

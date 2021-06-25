@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeReviewCard(props) {
 
   const category = useSelector(state => state.category)
+  const [expandedId, setExpandedId] = React.useState(-1);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -64,15 +65,15 @@ export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleExpandClick = i => {
+    setExpandedId(expandedId === i ? -1 : i);
   };
 
   return (
     <div>
       <Container>
         <Grid container spacing={1}>
-          {category.categories.map(child => (
+          {category.categories.map((child,i) => (
             <Grid item xs={12} sm={4} key={category.id}>
               <Card className={classes.card}>
                     <CardMedia
@@ -89,8 +90,8 @@ export default function RecipeReviewCard(props) {
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expanded,
                       })}
-                      onClick={handleExpandClick}
-                      aria-expanded={expanded}
+                      onClick={() => handleExpandClick(i)}
+                      aria-expanded={expandedId === i}
                       aria-label="show more"
                     >
                       <ExpandMoreIcon />
@@ -98,7 +99,7 @@ export default function RecipeReviewCard(props) {
                   </CardActions>
 
 
-                  <Collapse in={expanded} timeout="auto" unmountOnExit style={{paddingTop:'0%'}}>
+                  <Collapse in={expandedId === i} timeout="auto" unmountOnExit style={{paddingTop:'0%'}}>
                             <SubCategory category={child} style={{paddingTop:'0%'}}/>
                   </Collapse>
               </Card>

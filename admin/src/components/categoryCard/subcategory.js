@@ -58,32 +58,32 @@ export default function SubCategory(props) {
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [expandedId, setExpandedId] = React.useState(-1);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleExpandClick = i => {
+    setExpandedId(expandedId === i ? -1 : i);
   };
-
   return (
     <div style={{paddingTop:'0%'}}>
       <Container style={{paddingTop:'0%'}}>
         <>
-      {(props.category).children.map(childs => (
+      {(props.category).children.map((childs,i) => (
             <>
                   <CardActions disableSpacing style={{paddingTop:'0%',paddingBottom:'0%'}}>
                         <h2 className={classes.category}>{childs.name}</h2>
-                    <IconButton style={{marginLeft:'65%'}}
+                    <IconButton
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expanded,
                       })}
-                      onClick={handleExpandClick}
-                      aria-expanded={expanded}
+                      onClick={() => handleExpandClick(i)}
+                      aria-expanded={expandedId === i}
                       aria-label="show more"
                     >
                       <ExpandMoreIcon />
                     </IconButton>
                   </CardActions>
-                  <Collapse in={expanded} timeout="auto" unmountOnExit>
-                      {childs.children.map(subchild => (
+                  <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+                      {childs.children.map((subchild,i) => (
                               <p className={classes.subcategory}>{subchild.name}</p>
                             ))} 
                   </Collapse>

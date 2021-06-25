@@ -99,7 +99,9 @@ export default function ButtonAppBar() {
           </Typography>
           {/* <Button component={ Link } to="/signin" color="#1F2937"  className={classes.btn}>Login</Button> */}
           
-          {auth.authenticate ? renderLoggedInLinks() : renderNonLoggedInLinks()}
+          <Toolbar>
+              <Button component={ Link } to="/signup" color="#1F2937" className={classes.btn1} method="POST">Start Selling</Button>
+          </Toolbar>
         </Toolbar>
       </AppBar>
     </div>

@@ -54,9 +54,6 @@ export default function RecipeReviewCard(props) {
   const category = useSelector(state => state.category)
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllCategory())
-  }, [])
 
   console.log(category)
 

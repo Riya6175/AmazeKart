@@ -49,9 +49,7 @@ export default function SubCategory(props) {
   const category = useSelector(state => state.category)
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllCategory())
-  }, [])
+  
 
   console.log(category)
 
@@ -70,7 +68,7 @@ export default function SubCategory(props) {
             <>
                   <CardActions disableSpacing style={{paddingTop:'0%',paddingBottom:'0%'}}>
                         <h2 className={classes.category}>{childs.name}</h2>
-                    <IconButton style={{marginLeft:'65%'}}
+                    <IconButton 
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expanded,
                       })}

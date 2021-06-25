@@ -1,7 +1,8 @@
 import React from "react";
 import Sidebar from "../home/sidebar";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-
+import AddProduct from '../../components/products/AddProduct';
+import DisplayProducts from "./index";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,7 +12,10 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         ...theme.mixins.toolbar,
         padding: theme.spacing(2),
-    }
+    },buttons: {
+      display: "flex",
+      justifyContent:"flex-end"
+    },
   }));
 
 const Products = () => {
@@ -21,7 +25,11 @@ const Products = () => {
         <div style={{ marginTop: "5%"}} className={classes.root}>
         <Sidebar/>
         <div className={classes.products}>
-        products
+          <div className={classes.buttons}>
+            <AddProduct/>
+            
+          </div>
+          <DisplayProducts style={{marginTop:"10%"}}/>
         </div>
         </div>
         
