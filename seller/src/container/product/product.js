@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         ...theme.mixins.toolbar,
         padding: theme.spacing(2),
-    },buttons: {
+    },
+    buttons: {
       display: "flex",
       justifyContent:"flex-end"
     },
@@ -27,9 +28,8 @@ const Products = () => {
         <div className={classes.products}>
           <div className={classes.buttons}>
             <AddProduct/>
-            
           </div>
-          <DisplayProducts style={{marginTop:"10%"}}/>
+          <DisplayProducts />
         </div>
         </div>
         

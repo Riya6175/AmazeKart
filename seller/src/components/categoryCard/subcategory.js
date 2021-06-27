@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "15%",
     lineHeight:'20%',
     fontFamily:'Roboto',
-    fontSize:'1.25rem'
+    fontSize:'1.25rem',
+    textAlign:'left !important'
   }
 }));
 
@@ -55,31 +56,33 @@ export default function SubCategory(props) {
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [expandedId, setExpandedId] = React.useState(-1);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleExpandClick = j => {
+    setExpandedId(expandedId === j ? -1   : j );
+    
   };
 
   return (
     <div style={{paddingTop:'0%'}}>
       <Container style={{paddingTop:'0%'}}>
         <>
-      {(props.category).children.map(childs => (
+      {(props.category).children.map((childs,j) => (
             <>
                   <CardActions disableSpacing style={{paddingTop:'0%',paddingBottom:'0%'}}>
                         <h2 className={classes.category}>{childs.name}</h2>
-                    <IconButton 
+                        <IconButton
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expanded,
                       })}
-                      onClick={handleExpandClick}
-                      aria-expanded={expanded}
+                      onClick={() => handleExpandClick(j)}
+                      aria-expanded={expandedId === j}
                       aria-label="show more"
                     >
                       <ExpandMoreIcon />
                     </IconButton>
                   </CardActions>
-                  <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  <Collapse in={expandedId === j} timeout="auto" unmountOnExit>
                       {childs.children.map(subchild => (
                               <p className={classes.subcategory}>{subchild.name}</p>
                             ))} 

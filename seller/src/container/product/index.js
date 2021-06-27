@@ -11,9 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import SimpleModal from '../../components/productModal/productdisplay'
+
 import Typography from '@material-ui/core/Typography';
 
 
@@ -26,6 +25,7 @@ const useStyles = makeStyles({
     fontWeight: '600'
   },
   content:{
+    flexGrow:1,
     fontSize:'1.25rem',
     color:'#232f3e',
     fontFamily:'Roboto',
@@ -72,7 +72,7 @@ export default function ProductDetails(){
           <TableRow >
             <TableCell></TableCell>
             <TableCell className={classes.Heading}>Product Name</TableCell>
-            
+
             <TableCell className={classes.Heading}>
             <TableSortLabel 
             active={orderBy === (price)} 
@@ -83,6 +83,7 @@ export default function ProductDetails(){
             </TableCell>
             
             <TableCell className={classes.Heading}><TableSortLabel>Quantity</TableSortLabel></TableCell>
+            <TableCell className={classes.Heading}><TableSortLabel>Category</TableSortLabel></TableCell>
           </TableRow>
         </TableHead>
         <TableBody style={{background:"#eef9fb"}}>
@@ -92,34 +93,32 @@ export default function ProductDetails(){
             <>
             <TableRow className={classes.rowshover}> 
               <TableCell>
-                  <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                  </IconButton>
+              <SimpleModal description={product.description} image={product}/>
               </TableCell>
               <TableCell className={classes.content}>{product.name}</TableCell>
               <TableCell className={classes.content}>{product.price}</TableCell>
               <TableCell className={classes.content}>{product.quantity}</TableCell>
-              {/* <TableCell>{product.description}</TableCell> */}
+              <TableCell className={classes.content}>{product.category.name}</TableCell>
             </TableRow>
-            <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} className={classes.rowshover} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              
-              <Table size="small" aria-label="purchases">
-                <TableHead >
-                  <TableCell style={{fontSize:'1.2rem',fontFamily:'Roboto',fontWeight:'800'}}> Description </TableCell>
-                </TableHead>
-                <TableBody>
-                    <TableRow className={classes.rowshover}>
-                      <TableCell className={classes.content} component="th" scope="row" >{product.description}</TableCell>
-                    </TableRow>
-                </TableBody>
-              </Table>
-            </Box>
-            </Collapse>
-            </TableCell>
-            </TableRow>
+            
+              {/* <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} className={classes.rowshover} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box margin={1}>
+                    
+                    <Table size="small" aria-label="purchases">
+                      <TableHead >
+                        <TableCell style={{fontSize:'1.2rem',fontFamily:'Roboto',fontWeight:'800'}}> Description </TableCell>
+                      </TableHead>
+                      <TableBody>
+                          <TableRow className={classes.rowshover}>
+                            <TableCell className={classes.content} component="th" scope="row" >{product.description}</TableCell>
+                          </TableRow>
+                      </TableBody>
+                    </Table>
+                  </Box>
+                  </Collapse>
+                  </TableCell> */}
+            
             </>
             ) : null
           }

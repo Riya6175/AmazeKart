@@ -48,8 +48,15 @@ const useStyles = makeStyles((theme) => ({
   ['@media (max-width:360px)']:{
     btn1:{
       marginLeft:"25%",
+      height:'30px',
+      fontSize:'0.7rem',
+      lineHeight:'1.5'
       
   }
+},
+logo: {
+  maxWidth: 80,
+  height:50
 },
   
 }));
@@ -83,20 +90,21 @@ export default function ButtonAppBar() {
   return (
     <div className={classes.root}>
       
-      <AppBar position="fixed" style={{background: "#F9FAFB"}}>
+      <AppBar position="fixed" style={{background: "#F9FAFB", textAlign:'left'}}>
       
         <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             
-            <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#1F2937"}} variant="h6" className={classes.title}>
-            AmazeKart  
-          </Typography>
-            </IconButton>
-            {/* <MenuIcon /> */}
-            {/* <img src="https://i.postimg.cc/9FngKd9d/header-gray-removebg-preview.png" alt="header" border="0" className={classes.img}/> */}
-          <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#1F2937"}} variant="h6" className={classes.title1}>
+        <Toolbar>
+            <img src="./images/logo_blue.png" alt="logo" className={classes.logo} />
+          </Toolbar>
+            <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#1F2937",float:'right',clear:'both'}} variant="h6" className={classes.title}>
+            AmazeKart 
+            <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#1F2937", marginLeft:'38%',textAlign:'center'}} variant="h6" className={classes.title1}>
              Grow Your Bussiness. 
+          </Typography> 
           </Typography>
+            
+          
           {/* <Button component={ Link } to="/signin" color="#1F2937"  className={classes.btn}>Login</Button> */}
           
           <Toolbar>

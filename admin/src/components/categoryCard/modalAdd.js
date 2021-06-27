@@ -17,6 +17,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import clsx from 'clsx';
+import Fab from '@material-ui/core/Fab';
 import { addCategory } from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -137,7 +138,7 @@ export default function AddCategory() {
           label="Required"
           placeholder={'Category Name'}
           variant="outlined"
-          style={{margin:"3%", width:"30%"}}
+          style={{marginTop:"3%",marginLeft:'3%', width:"30%"}}
           value={categoryName}
           onChange={(e) => setCategoryName(e.target.value)}
         />
@@ -157,16 +158,27 @@ export default function AddCategory() {
             </MenuItem>
           ))}
         </TextField>
-        
+        <label htmlFor="upload-photo" style={{marginLeft:"3%",marginTop:"3%",height:"10%"}}>
+          <span style={{display:'flex',marginLeft:"3%"}}> {JSON.stringify(categoryImage.name)} </span>
+            <input
+              style={{ display: 'none' }}
+              id="upload-photo"
+              name="categoryImage"
+              type="file"
+              onChange={handleCategoryImage}
+            />
+               
+            <Fab
+              size="larfe"
+              component="span"
+              aria-label="add"
+              variant="extended"
+              style={{marginLeft:"3%",marginTop:'2%',backgroundColor:"#4b5563",color:'#fff'}}
+            >
+              <AddCircleIcon style={{padding:'2%',color:'#fff'}}/> Upload photo
+            </Fab>
+        </label>
         </List>
-        <Button
-            variant="contained"
-            containerElement='label' // <-- Just add me!
-            label='My Label'
-            style={{marginLeft:"3%",marginTop:"1%",height:"5%", width:"30%"}}
-        >
-            <input type="file" style={{padding:"10%"}} name="categoryImage" onChange={handleCategoryImage}/>
-        </Button>
       </Dialog>
     </div>
   );

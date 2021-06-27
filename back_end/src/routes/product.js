@@ -1,4 +1,5 @@
 const express = require('express');
+const app = express();
 const Category = require("../models/category");
 const slugify = require("slugify");
 const multer = require("multer");
@@ -6,6 +7,8 @@ const path = require('path')
 // const { addCategory,getCategories } = require('../controller/category');
 const { requireSignin, sellerMiddleware, adminMiddleware } = require("../common-middleware");
 const { createProduct } = require('../controller/product');
+app.use(express.static(path.join( path.dirname(__dirname),'uploads')))
+
 
 const router = express.Router();
 const shortid = require("shortid");

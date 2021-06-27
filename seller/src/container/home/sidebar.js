@@ -39,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textAlign: 'center',
+    alignItems: "center", 
+    display: 'flex', 
+    justifyContent: "center" ,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -104,7 +108,14 @@ const useStyles = makeStyles((theme) => ({
     '@media(minWidth: 360px)' : {
         display:"None ",
       }
-  }
+  },
+  logo: {
+    maxWidth: 200,
+    height:40,
+    textAlign: 'center',
+    paddingRight:'2%'
+
+  },
 }));
 
 const Sidebar = (props) => {
@@ -169,6 +180,7 @@ const Sidebar = (props) => {
             <MenuIcon style={{color:"#000"}} />
           </IconButton>
           <Typography component={ Link } to="/seller" style={{textDecoration: "none",color:"#000"}} variant="h6" className={classes.title}>
+          <img src="./images/logo_blue.png" alt="logo" className={classes.logo} />
             AmazeKart &nbsp; &nbsp; &nbsp; &nbsp; Sell Your Products 
           </Typography>
             {auth.authenticate ? renderLoggedInLinks() : renderNonLoggedInLinks()}
@@ -196,7 +208,7 @@ const Sidebar = (props) => {
         </div>
         <Divider />
         <List>
-            <ListItem button component={ Link } to="/">
+            <ListItem button component={ Link } to="/seller">
               <ListItemIcon>
                 <HomeIcon/>
               </ListItemIcon>

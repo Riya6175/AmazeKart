@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     
     boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.3)",
     backgroundColor: "#fafafa",
+    borderRadius:'12px'
   },
   title:{
     marginLeft:'10%'
@@ -70,18 +71,19 @@ export default function RecipeReviewCard(props) {
   };
 
   return (
-    <div>
+    <div style={{marginBottom:'3%'}}>
       <Container>
         <Grid container spacing={1}>
           {category.categories.map((child,i) => (
-            <Grid item xs={12} sm={4} key={category.id}>
+            <Grid item xs={12} sm={3} key={category.id}>
               <Card className={classes.card}>
-                    <CardMedia
-                      
+                    {/* <CardMedia
+                      style={{height: 0, paddingTop: '56.25%'}}
                       className={classes.media}
-                      image={""}
+                      image={require ("./images/logo_blue.png")}
                       backgroundColor="#000"
-                    />
+                    /> */}
+                    <img src={child.categoryImage} style={{height: '230px', paddingTop: '0%'}}/>
                   <CardActions disableSpacing style={{paddingTop:'0%',paddingBottom:'0%'}}>
                     <Typography className={classes.title}>
                       <h2 style={{paddingTop:'0%',margin:'0px',marginBottom:'4px',fontFamily:'Montserrat'}}>{child.name}</h2>

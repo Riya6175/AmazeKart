@@ -10,12 +10,13 @@ import DeleteCategory from "../../components/categoryCard/categoryDelete";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      display:"flex"
+      display:"flex",
     },
     products:{
         flexGrow: 1,
         ...theme.mixins.toolbar,
-        padding: theme.spacing(2),
+        padding: theme.spacing(0, 1),
+        justifyContent:'center'
     },
     buttons: {
       display: "flex",
@@ -30,22 +31,24 @@ const Category = () => {
       <div style = {{marginTop: "5%"}} className={classes.root}>
           <Sidebar/>
           <div container className={classes.products}>
-          <div className={classes.buttons}>
-                <DeleteCategory/>
-                <AddCategory/>
-            </div>
-            <Typography
+              <div className={classes.buttons}>
+                    <DeleteCategory/>
+                    <AddCategory/>
+              </div>
+              <Typography
               color="textPrimary"
               gutterBottom
               variant="h2"
               align="center"
-            >
-            Categories
-          </Typography>
-          
-                <RecipeReviewCard/>
+              className={classes.products}
+              >
+                Categories
                 
-          </div>
+              </Typography>
+          
+              <RecipeReviewCard/>
+                
+            </div>
     </div>
     )
 };

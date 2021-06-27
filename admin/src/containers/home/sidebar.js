@@ -38,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textAlign: 'center',
+    alignItems: "center", 
+    display: 'flex', 
+    justifyContent: "center" ,
+    
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -96,10 +101,18 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   buttons:{
+    marginLeft:'50%',
     '@media(minWidth: 360px)' : {
         display:"None ",
       }
-  }
+  },
+  logo: {
+    maxWidth: 200,
+    height:40,
+    textAlign: 'center',
+    paddingRight:'2%'
+
+  },
 }));
 
 const Sidebar = (props) => {
@@ -108,23 +121,6 @@ const Sidebar = (props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  // const itemsList = [
-  //   {
-  //     text: "Home",
-  //     icon: <HomeIcon/>,
-  //     onClick: () => history.push("/")
-  //   },
-  //   {
-  //     text: "Products",
-  //     icon: <AddBoxIcon/>,
-  //     onClick: () => history.push("/products")
-  //   },
-  //   {
-  //     text: "Orders",
-  //     icon: <AddShoppingCartIcon/>,
-  //     onClick: () => history.push("/orders")
-  //   }
-  // ]
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -181,7 +177,9 @@ const Sidebar = (props) => {
           >
             <MenuIcon />
           </IconButton>
+          
           <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#fff"}} variant="h6" className={classes.title}>
+            <img src="./images/logo_white.png" alt="logo" className={classes.logo} />
             AmazeKart - Admin 
           </Typography>
           

@@ -201,31 +201,27 @@ console.log(productPictures)
             </MenuItem>
           ))}
         </TextField>
-
-        {
-          productPictures.length > 0 ? productPictures.map((pic,index) => <div key={index}> {JSON.stringify(pic.name)} </div>) : null
-        }
         <TextField
           id="outlined-multiline-static"
           label="Description"
           multiline
           rows={5}
           placeholder={"Description"}
-          style={{marginLeft:"3%", width:"50%"}}
+          style={{marginLeft:"3%", width:"50%",marginBottom:'2%'}}
           variant="outlined"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-         
-        {/* <Button
-            variant="contained"
-            containerElement='label' // <-- Just add me!
-            label='My Label'
-            style={{marginLeft:"3%",marginTop:"1%",height:"30%", width:"30%",background:'#fff'}}
-        >
-            <input type="file" size="60"  name="categoryImage" />
-        </Button> */}
+        <div>
+        
+        
         <label htmlFor="upload-photo" style={{marginLeft:"3%",marginTop:"20%",height:"30%"}}>
+        <div style={{marginLeft:'3%'}} >
+          {
+          productPictures.length > 0 ? productPictures.map((pic,index) => <span key={index} style={{display:'flex',position:'relative'}}> {JSON.stringify(pic.name)} </span>) : null
+          }
+          </div>
+        
             <input
               style={{ display: 'none' }}
               id="upload-photo"
@@ -233,7 +229,7 @@ console.log(productPictures)
               type="file"
               onChange={handleProductPictures}
             />
-
+               
             <Fab
               size="small"
               component="span"
@@ -241,9 +237,11 @@ console.log(productPictures)
               variant="extended"
               style={{margin:"3%",backgroundColor:"#ff9900"}}
             >
+              
               <AddCircleIcon style={{padding:'2%'}}/> Upload photo
             </Fab>
         </label>
+        </div>
         </List>
       </Dialog>
     </div>

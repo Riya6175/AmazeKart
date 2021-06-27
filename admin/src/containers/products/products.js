@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     products:{
         flexGrow: 1,
         ...theme.mixins.toolbar,
-        padding: theme.spacing(2),
+        padding: theme.spacing(0,10),
     },buttons: {
       display: "flex",
       justifyContent:"flex-end"

@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import {Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux"
@@ -82,7 +83,11 @@ const useStyles = makeStyles((theme) => ({
     '@media(minWidth: 360px)' : {
         display:"None ",
       }
-  }
+  },
+  logo: {
+    maxWidth: 80,
+    height:50
+  },
 }));
 
 export default function Header() {
@@ -134,17 +139,9 @@ export default function Header() {
         })}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
+          <Toolbar>
+            <img src="./images/logo_white.png" alt="logo" className={classes.logo} />
+          </Toolbar>
           <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#fff"}} variant="h6" className={classes.title}>
             AmazeKart - Admin 
           </Typography>
