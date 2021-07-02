@@ -228,6 +228,7 @@ console.log(productPictures)
               name="productPicture"
               type="file"
               onChange={handleProductPictures}
+              multiple="multiple"
             />
                
             <Fab
