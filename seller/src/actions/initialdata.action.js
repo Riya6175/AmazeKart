@@ -5,7 +5,7 @@ import { initialDataConstants, productConstants } from "./constants"
 export const getInitialData = () => {
     return async dispatch => {
         // dispatch({type: initialDataConstants.GET_ALL_INITIAL_DATA_REQUEST });
-        const res = await axiosInstance.post('/initialData/products');
+        const res = await axiosInstance.post(`/initialData/products`);
         if(res.status === 200){
             const {categories,products} = res.data;
             dispatch({

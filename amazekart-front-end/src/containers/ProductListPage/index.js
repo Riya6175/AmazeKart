@@ -27,10 +27,9 @@ export default function ProductListPage(props) {
 
         under5k: 5000,
         under10k: 10000,
-        under15k: 15000,
         under20k: 20000,
-        under25k: 25000,
-        under30k: 30000
+        under30k: 30000,
+        above30k: 30000
     }
     )
 
@@ -47,21 +46,21 @@ export default function ProductListPage(props) {
                 return (
                     <div>
                             <div className="cardHeader">
-                            <div>{props.match.params.slug} Mobiles  under {priceRange[key]}</div>
+                            <div>{props.match.params.slug} Mobiles {priceRange[key]}</div>
                             
                     </div>
-                    <Carousel breakPoints={breakPoints} style={{marginBottom:"2%"}}>
-                        <Item>
-                            <div>
+                    <Carousel breakPoints={breakPoints} disableArrowsOnEnd={false} style={{marginBottom:"1%"}}>
+                    
+                            
                             {
                                 product.productsByPrice[key].map(product =>
-                                    <div>
+                                    <Item>
                                         <div>
                                             <img src={generatePublicUrl(product.productPictures[0].img)} style={{height:"40vh"}} />
 
                                         </div>
                                         <div>
-                                            <div>
+                                            <div style={{margin:"4%"}}>
                                                 {product.name}
                                             </div>
                                             <div>
@@ -75,11 +74,11 @@ export default function ProductListPage(props) {
                                             <div> Rs. {product.price} </div>
                                             <Button variant="outlined">view Details</Button>
                                         </div>
-                                    </div>
+                                    </Item>
                                 )
                             }
-                        </div>
-                        </Item>
+                        
+                        
                         
                     </Carousel>
                     </div>

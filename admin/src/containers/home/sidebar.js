@@ -141,7 +141,7 @@ const Sidebar = (props) => {
       return (
           <Toolbar>
               <Button component={ Link } to="/signin" color="inherit" className="buttons">Login</Button>
-                <Button component={ Link } to="/signup" color="inherit" method="POST" >Signup</Button>
+
           </Toolbar>
         
       )
@@ -207,13 +207,6 @@ const Sidebar = (props) => {
         </div>
         <Divider />
         <List>
-            <ListItem button component={ Link } to="/">
-              <ListItemIcon>
-                <HomeIcon/>
-              </ListItemIcon>
-              Home
-              <ListItemText/>
-            </ListItem>
             <ListItem button component={ Link } to="/products">
               <ListItemIcon>
                 <AddBoxIcon/>

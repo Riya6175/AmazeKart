@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router-dom'
 import './App.css';
 import home from "./containers/home/home"
 import signin from "./containers/signin/signin";
-import signup from "./containers/signup/signup";
+
 import PrivateRoute from "./components/HOC/PrivateRoute"
 import {useDispatch , useSelector} from "react-redux"
 import { isUserLoggedIn, getInitialData} from "./actions"
@@ -35,7 +35,7 @@ function App() {
           <PrivateRoute path="/orders"  component={Orders} />
           <PrivateRoute path="/category"  component={Category} />
           <Route path="/signin" component={signin} />
-          <Route path="/signup" component={signup} />
+          
         </Switch>
     </div>
   );

@@ -3,6 +3,7 @@
     text-align:center;
     font-size: 2rem;
     margin-top: 2%;
+    font-family: Roboto;
     
 }
 /* 
@@ -36,3 +37,23 @@
     background: none;
 
 }
+.rec.rec-arrow {
+    border: none;
+    background: none;
+    box-shadow: none;
+    margin: 0 2%;
+}
+/* round buttons on hover */
+.rec.rec-arrow:hover .rec.rec-arrow:active .rec.rec-arrow:focus {
+    background-color: #000;
+    
+
+}
+
+button.rec-dot{
+    background-color: none;
+    box-shadow: none;
+    display: none;
+  }
+  
+  

@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import RecipeReviewCard from "../../components/categoryCard/card"
 import AddCategory from "../../components/categoryCard/modalAdd";
 import DeleteCategory from "../../components/categoryCard/categoryDelete";
+import EditCategory from "../../components/categoryCard/editCategory";
 
 
 
@@ -34,6 +35,7 @@ const Category = () => {
               <div className={classes.buttons}>
                     <DeleteCategory/>
                     <AddCategory/>
+                    <EditCategory/>
               </div>
               <Typography
               color="textPrimary"

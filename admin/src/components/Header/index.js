@@ -114,7 +114,7 @@ export default function Header() {
       return (
           <Toolbar>
               <Button component={ Link } to="/signin" color="inherit" className="buttons">Login</Button>
-                <Button component={ Link } to="/signup" color="inherit" method="POST" >Signup</Button>
+            
           </Toolbar>
         
       )

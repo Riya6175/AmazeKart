@@ -141,14 +141,7 @@ export default function Signin(props) {
           >
             Login
           </Button>
-          <Grid container justify="center">
-            <Grid item>
-              <Link href="/signUp" variant="body2">
-                  
-                Don't have an account? Create a new one.
-              </Link>
-            </Grid>
-          </Grid>
+          
         </form>
       </div>
       <hr style={{ marginTop: "10%"}}/>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,6 +15,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from 'clsx';
+import CheckboxTree from 'react-checkbox-tree';
+import {IoIosCheckboxOutline,IoIosCheckbox,IoIosArrowDown,IoIosArrowForward} from 'react-icons/io'
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+import {getAllCategory,addCategory} from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -59,6 +64,19 @@ export default function DeleteCategory() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  const category = useSelector(state => state.category);
+  const [categoryName, setCategoryName] = useState('');
+  const [parentCategoryId, setParentCategoryId] = useState('');
+  const [categoryImage, setCategoryImage] = useState('');
+
+  const [checked, setChecked] = useState([]);
+  const [expanded, setExpanded] = useState([]);
+  const [checkedArray, setCheckedArray] = useState([]);
+  const [expandedArray, setExpandedArray] = useState([]);
+  // const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
+  // const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
+  const dispatch = useDispatch();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -66,6 +84,37 @@ export default function DeleteCategory() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const renderCategories = (categories) => {
+    let myCategories = [];
+    for (let category of categories) {
+        myCategories.push(
+            {
+                label: category.name,
+                value: category._id,
+                children: category.children.length > 0 && renderCategories(category.children)
+            }
+        );
+    }
+    return myCategories;
+}
+
+const createCategoryList = (categories, options = []) => {
+
+  for (let category of categories) {
+      options.push({
+          value: category._id,
+          name: category.name,
+          parentId: category.parentId,
+          type: category.type
+      });
+      if (category.children.length > 0) {
+          createCategoryList(category.children, options)
+      }
+  }
+
+  return options;
+}
 
   return (
     <div>
@@ -85,21 +134,29 @@ export default function DeleteCategory() {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Sound
+              Delete category
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button>
           </Toolbar>
         </AppBar>
-        <List>
-          <ListItem button>
-            <ListItemText primary="Phone ringtone" secondary="Titania" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-          </ListItem>
+        <List style={{margin:"2%"}}>
+          <h1>Categories</h1>
+        <CheckboxTree
+                nodes={renderCategories(category.categories)}
+                checked={checked}
+                expanded={expanded}
+                onCheck={checked => setChecked(checked)}
+                onExpand={expanded => setExpanded(expanded)}
+                icons={{
+                  check: <IoIosCheckbox />,
+                  uncheck: <IoIosCheckboxOutline />,
+                  halfCheck: <IoIosCheckboxOutline />,
+                  expandClose: <IoIosArrowForward />,
+                  expandOpen: <IoIosArrowDown />
+                }}
+            />
         </List>
       </Dialog>
     </div>
