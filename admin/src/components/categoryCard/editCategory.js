@@ -22,7 +22,7 @@ import Fab from '@material-ui/core/Fab';
 import CheckboxTree from 'react-checkbox-tree';
 import { IoIosCheckboxOutline, IoIosCheckbox, IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
-import { getAllCategory, addCategory } from '../../actions';
+import { getAllCategory, addCategory, updateCategories } from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -146,6 +146,29 @@ export default function EditCategory() {
         }
     }
 
+    const updateCategoriesForm = () => {
+        const form = new FormData();
+
+        expandedArray.forEach((item,index) => {
+            form.append('_id',item.value);
+            form.append('name',item.name);
+            form.append('parentId',item.parentId ? item.parentId: "");
+        })
+        checkedArray.forEach((item,index) => {
+            form.append('_id',item.value);
+            form.append('name',item.name);
+            form.append('parentId',item.parentId ? item.parentId: "");
+        })
+        dispatch(updateCategories(form))
+        .then(result => {
+            if(result){
+                dispatch(getAllCategory())
+            }
+        })
+        setUpdateCategoryModal(false);
+        setOpen(false);
+    }
+
     return (
         <div style={{ display: "flex" }}>
             <Button
@@ -166,7 +189,7 @@ export default function EditCategory() {
                         <Typography variant="h6" className={classes.title}>
                             Edit category
                         </Typography>
-                        <Button autoFocus color="inherit" onClick={handleClose}>
+                        <Button autoFocus color="inherit" onClick={updateCategoriesForm}>
                             save
                         </Button>
                     </Toolbar>
@@ -280,11 +303,12 @@ export default function EditCategory() {
                             <AddCircleIcon style={{ padding: '2%', color: '#fff' }} /> Upload photo
                         </Fab>
                     </label>
-                </List>
-
-                <Button autoFocus color="inherit" style={{ width: "10%", marginLeft: "5%", background: "#4b5563", color: "#fff" }} onClick={updateCategory} >
+                    <Button autoFocus color="inherit" style={{ width: "10%", marginLeft: "5%",marginTop:"2%", background: "#4b5563", color: "#fff" }} onClick={updateCategory} >
                     Edit
                 </Button>
+                </List>
+
+                
             </Dialog>
         </div>
     );
