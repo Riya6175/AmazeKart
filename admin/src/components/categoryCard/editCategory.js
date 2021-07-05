@@ -281,7 +281,7 @@ export default function EditCategory() {
                             </>
                         )
                     }
-
+{/* 
 
                     <label htmlFor="upload-photo" style={{ marginLeft: "3%", marginTop: "3%", height: "10%" }}>
                         <span style={{ display: 'flex', marginLeft: "3%" }}> {JSON.stringify(categoryImage.name)} </span>
@@ -302,7 +302,7 @@ export default function EditCategory() {
                         >
                             <AddCircleIcon style={{ padding: '2%', color: '#fff' }} /> Upload photo
                         </Fab>
-                    </label>
+                    </label> */}
                     <Button autoFocus color="inherit" style={{ width: "10%", marginLeft: "5%",marginTop:"2%", background: "#4b5563", color: "#fff" }} onClick={updateCategory} >
                     Edit
                 </Button>

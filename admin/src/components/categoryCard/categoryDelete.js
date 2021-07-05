@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -16,13 +17,14 @@ import Slide from '@material-ui/core/Slide';
 import DeleteIcon from '@material-ui/icons/Delete';
 import clsx from 'clsx';
 import CheckboxTree from 'react-checkbox-tree';
-import {IoIosCheckboxOutline,IoIosCheckbox,IoIosArrowDown,IoIosArrowForward} from 'react-icons/io'
+import { IoIosCheckboxOutline, IoIosCheckbox, IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
-import {getAllCategory,addCategory} from '../../actions';
+import { getAllCategory, addCategory, deleteCategories} from '../../actions';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
+    backgroundColor: '#4b5563'
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -30,13 +32,13 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(1),
-    backgroundColor:"#4b5563",
+    backgroundColor: "#4b5563",
   },
   buttons: {
     display: "flex",
-    justifyContent:"flex-end"
+    justifyContent: "flex-end"
   },
-  
+
   primary: {
 
     '&:hover': { // changes colors for button hover state
@@ -63,6 +65,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function DeleteCategory() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [show, setShow] = useState(false);
 
   const category = useSelector(state => state.category);
   const [categoryName, setCategoryName] = useState('');
@@ -73,8 +76,7 @@ export default function DeleteCategory() {
   const [expanded, setExpanded] = useState([]);
   const [checkedArray, setCheckedArray] = useState([]);
   const [expandedArray, setExpandedArray] = useState([]);
-  // const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
-  // const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
+  const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
   const dispatch = useDispatch();
 
   const handleClickOpen = () => {
@@ -85,48 +87,93 @@ export default function DeleteCategory() {
     setOpen(false);
   };
 
+  useEffect(() => {
+
+    if (!category.loading) {
+        setShow(false);
+    }
+
+}, [category.loading]);
+
+
+
+
   const renderCategories = (categories) => {
     let myCategories = [];
     for (let category of categories) {
-        myCategories.push(
-            {
-                label: category.name,
-                value: category._id,
-                children: category.children.length > 0 && renderCategories(category.children)
-            }
-        );
+      myCategories.push(
+        {
+          label: category.name,
+          value: category._id,
+          children: category.children.length > 0 && renderCategories(category.children)
+        }
+      );
     }
     return myCategories;
-}
-
-const createCategoryList = (categories, options = []) => {
-
-  for (let category of categories) {
-      options.push({
-          value: category._id,
-          name: category.name,
-          parentId: category.parentId,
-          type: category.type
-      });
-      if (category.children.length > 0) {
-          createCategoryList(category.children, options)
-      }
   }
 
-  return options;
-}
+  const createCategoryList = (categories, options = []) => {
+
+    for (let category of categories) {
+      options.push({
+        value: category._id,
+        name: category.name,
+        parentId: category.parentId,
+        type: category.type
+      });
+      if (category.children.length > 0) {
+        createCategoryList(category.children, options)
+      }
+    }
+
+    return options;
+  }
+
+  const updateCheckedAndExpandedCategories = () => {
+    const categories = createCategoryList(category.categories)
+    const checkedArray = [];
+    const expandedArray = [];
+    checked.length > 0 && checked.forEach((categoryId, index) => {
+      const category = categories.find((category, _index) => categoryId == category.value)
+      category && checkedArray.push(category)
+    })
+    expanded.length > 0 && expanded.forEach((categoryId, index) => {
+      const category = categories.find((category, _index) => categoryId == category.value)
+      category && expandedArray.push(category)
+    })
+    setCheckedArray(checkedArray)
+    setExpandedArray(expandedArray)
+    console.log({ checked, expanded, categories, checkedArray, expandedArray })
+  }
+  const deleteCategory = () => {
+    updateCheckedAndExpandedCategories();
+    setDeleteCategoryModal(true);
+  }
+  const deleteCategoriesHere = () => {
+    updateCheckedAndExpandedCategories();
+    const checkedIdsArray = checkedArray.map((item, index) => ({ _id: item.value }))
+    const expandedIdsArray = expandedArray.map((item, index) => ({ _id: item.value }))
+    const idsArray = expandedIdsArray.concat(checkedIdsArray);
+    dispatch(deleteCategories(idsArray))
+      .then(result => {
+        if (result) {
+          dispatch(getAllCategory());
+          setDeleteCategoryModal(false);
+        }
+      })
+  }
 
   return (
     <div>
       <Button
-                  variant="contained"
-                  color="primary"
-                  className={clsx(classes.primary,classes.button)}
-                  startIcon={<DeleteIcon />}
-                  onClick={handleClickOpen}
-                >
-                    Delete
-                </Button>
+        variant="contained"
+        color="primary"
+        className={clsx(classes.primary, classes.button)}
+        startIcon={<DeleteIcon />}
+        onClick={handleClickOpen}
+      >
+        Delete
+      </Button>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
@@ -141,22 +188,37 @@ const createCategoryList = (categories, options = []) => {
             </Button>
           </Toolbar>
         </AppBar>
-        <List style={{margin:"2%"}}>
+        <List style={{ margin: "2%" }}>
           <h1>Categories</h1>
-        <CheckboxTree
-                nodes={renderCategories(category.categories)}
-                checked={checked}
-                expanded={expanded}
-                onCheck={checked => setChecked(checked)}
-                onExpand={expanded => setExpanded(expanded)}
-                icons={{
-                  check: <IoIosCheckbox />,
-                  uncheck: <IoIosCheckboxOutline />,
-                  halfCheck: <IoIosCheckboxOutline />,
-                  expandClose: <IoIosArrowForward />,
-                  expandOpen: <IoIosArrowDown />
-                }}
-            />
+          <CheckboxTree
+            nodes={renderCategories(category.categories)}
+            checked={checked}
+            expanded={expanded}
+            onCheck={checked => setChecked(checked)}
+            onExpand={expanded => setExpanded(expanded)}
+            icons={{
+              check: <IoIosCheckbox />,
+              uncheck: <IoIosCheckboxOutline />,
+              halfCheck: <IoIosCheckboxOutline />,
+              expandClose: <IoIosArrowForward />,
+              expandOpen: <IoIosArrowDown />
+            }}
+          />
+          <h5>Expanded</h5>
+          {
+            expandedArray.map((item, index) => {
+              <span key={index}> {item.name} </span>
+            })
+          }
+          <h5>chekeded</h5>
+          {
+            checkedArray.map((item, index) => {
+              <span key={index}> {item.name} </span>
+            })
+          }
+          <Button autoFocus color="inherit" style={{ width: "10%", marginLeft: "3%", marginTop: "2%", background: "#4b5563", color: "#fff" }} onClick={deleteCategoriesHere} >
+            Delete
+          </Button>
         </List>
       </Dialog>
     </div>
