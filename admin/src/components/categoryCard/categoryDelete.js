@@ -154,13 +154,16 @@ export default function DeleteCategory() {
     const checkedIdsArray = checkedArray.map((item, index) => ({ _id: item.value }))
     const expandedIdsArray = expandedArray.map((item, index) => ({ _id: item.value }))
     const idsArray = expandedIdsArray.concat(checkedIdsArray);
-    dispatch(deleteCategories(idsArray))
+    if(checkedIdsArray.length > 0){
+      dispatch(deleteCategories(checkedIdsArray))
       .then(result => {
         if (result) {
           dispatch(getAllCategory());
           setDeleteCategoryModal(false);
         }
       })
+    }
+    
   }
 
   return (
@@ -204,18 +207,6 @@ export default function DeleteCategory() {
               expandOpen: <IoIosArrowDown />
             }}
           />
-          <h5>Expanded</h5>
-          {
-            expandedArray.map((item, index) => {
-              <span key={index}> {item.name} </span>
-            })
-          }
-          <h5>chekeded</h5>
-          {
-            checkedArray.map((item, index) => {
-              <span key={index}> {item.name} </span>
-            })
-          }
           <Button autoFocus color="inherit" style={{ width: "10%", marginLeft: "3%", marginTop: "2%", background: "#4b5563", color: "#fff" }} onClick={deleteCategoriesHere} >
             Delete
           </Button>

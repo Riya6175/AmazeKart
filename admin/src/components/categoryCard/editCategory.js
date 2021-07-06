@@ -160,11 +160,7 @@ export default function EditCategory() {
             form.append('parentId',item.parentId ? item.parentId: "");
         })
         dispatch(updateCategories(form))
-        .then(result => {
-            if(result){
-                dispatch(getAllCategory())
-            }
-        })
+        
         setUpdateCategoryModal(false);
         setOpen(false);
     }

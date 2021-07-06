@@ -29,7 +29,7 @@ export default function ProductListPage(props) {
         under10k: 10000,
         under20k: 20000,
         under30k: 30000,
-        above30k: 30000
+        above30k: "above 30000"
     }
     )
 
@@ -43,13 +43,14 @@ export default function ProductListPage(props) {
     return (
         <Layout>
             {Object.keys(product.productsByPrice).map((key, index) => {
+                
                 return (
                     <div>
                             <div className="cardHeader">
-                            <div>{props.match.params.slug} Mobiles {priceRange[key]}</div>
+                            <div>{props.match.params.slug} Mobiles under {priceRange[key]}</div>
                             
                     </div>
-                    <Carousel breakPoints={breakPoints} disableArrowsOnEnd={false} style={{marginBottom:"1%"}}>
+                    <Carousel breakPoints={breakPoints} disableArrowsOnEnd={false} style={{marginBottom:"1%",display:'none'}}>
                     
                             
                             {
@@ -83,8 +84,9 @@ export default function ProductListPage(props) {
                     </Carousel>
                     </div>
                 )
-
+            
             })}
+            
         </Layout>
 
     )

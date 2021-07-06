@@ -17,7 +17,8 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    overflowY:'hidden'
+    overflowY:'hidden',
+    justifyContent: "center"
     
   },
   title: {
@@ -29,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    display:'flex',
+    alignItems: "center"
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -110,15 +113,15 @@ export default function Header() {
         dispatch(signout());
   }
 
-  const renderNonLoggedInLinks = () => {
-      return (
-          <Toolbar>
-              <Button component={ Link } to="/signin" color="inherit" className="buttons">Login</Button>
+  // const renderNonLoggedInLinks = () => {
+  //     return (
+  //         <Toolbar>
+  //             <Button component={ Link } to="/signin" color="inherit" className="buttons">Login</Button>
             
-          </Toolbar>
+  //         </Toolbar>
         
-      )
-  }
+  //     )
+  // }
   const renderLoggedInLinks = () => {
     return (
         <Toolbar>
@@ -138,6 +141,7 @@ export default function Header() {
           [classes.appBarShift]: open,
         })}
       >
+      
         <Toolbar>
           <Toolbar>
             <img src="./images/logo_white.png" alt="logo" className={classes.logo} />
@@ -145,10 +149,8 @@ export default function Header() {
           <Typography component={ Link } to="/" style={{textDecoration: "none",color:"#fff"}} variant="h6" className={classes.title}>
             AmazeKart - Admin 
           </Typography>
-          
-            {auth.authenticate ? renderLoggedInLinks() : renderNonLoggedInLinks()}
-          
         </Toolbar>
+        
       </AppBar>
       
     </div>

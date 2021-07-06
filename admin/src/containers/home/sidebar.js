@@ -137,23 +137,23 @@ const Sidebar = (props) => {
         dispatch(signout());
   }
 
-  const renderNonLoggedInLinks = () => {
-      return (
-          <Toolbar>
-              <Button component={ Link } to="/signin" color="inherit" className="buttons">Login</Button>
+  // const renderNonLoggedInLinks = () => {
+  //     return (
+  //         <Toolbar>
+  //             <Button component={ Link } to="/signin" color="inherit" className="buttons">Login</Button>
 
-          </Toolbar>
+  //         </Toolbar>
         
-      )
-  }
-  const renderLoggedInLinks = () => {
-    return (
-        <Toolbar>
-            <Button color="inherit" className="buttons" method="POST" onClick={logout}>Log Out</Button>
-        </Toolbar>
+  //     )
+  // }
+//   const renderLoggedInLinks = () => {
+//     return (
+//         <Toolbar>
+//             <Button color="inherit" className="buttons" method="POST" onClick={logout}>Log Out</Button>
+//         </Toolbar>
       
-    )
-}
+//     )
+// }
 
   return (
     <div className={classes.root}>
@@ -183,7 +183,7 @@ const Sidebar = (props) => {
             AmazeKart - Admin 
           </Typography>
           
-            {auth.authenticate ? renderLoggedInLinks() : renderNonLoggedInLinks()}
+          <Button color="inherit" className="buttons" method="POST" onClick={logout}>Log Out</Button>
           
         </Toolbar>
       </AppBar>
@@ -238,10 +238,10 @@ const Sidebar = (props) => {
               Profile
               <ListItemText/>
             </ListItem>
-            <ListItem button component={ Link } to="/signout">
+            <ListItem button method="POST" onClick={logout} >
               <ListItemIcon>
                 <LockOpenIcon/>
-              </ListItemIcon>
+              </ListItemIcon >
               LogOut
               <ListItemText/>
             </ListItem>

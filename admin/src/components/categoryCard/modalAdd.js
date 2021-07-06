@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -68,16 +68,31 @@ export default function AddCategory() {
   const [categoryName, setCategoryName] = useState('');
   const [parentCategoryId, setParentCategoryId] = useState('');
   const [categoryImage, setCategoryImage] = useState('');
+  const [show, setShow] = useState(false);
   const category = useSelector(state => state.category)
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
+  const crossClose = () => {
+    setOpen(false);
+  }
+  useEffect(() => {
+
+    if (!category.loading) {
+        setShow(false);
+    }
+
+}, [category.loading]);
   const handleClose = () => {
 
     const form = new FormData();
     
+    if(categoryName === ''){
+      alert('Category Name is Required');
+      return;
+    }
 
     form.append('name', categoryName);
     form.append('parentId',parentCategoryId);
@@ -120,13 +135,13 @@ export default function AddCategory() {
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+            <IconButton edge="start" color="inherit" onClick={crossClose} aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
               Add Category
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit"  onClick={handleClose} >
               save
             </Button>
           </Toolbar>
