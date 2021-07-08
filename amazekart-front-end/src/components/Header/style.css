@@ -41,6 +41,8 @@
     height: 22px !important;
     background-color: #cd9042;
   }
+
+  
   
   .header__optionLineOne {
     font-size: 10px;
@@ -49,12 +51,17 @@
   .header__optionLineTwo {
     font-size: 13px;
     font-weight: 800;
+    color:#fff;
   }
   
   .header__optionBasket {
     display: flex;
     align-items: center;
     color: white;
+  }
+  .header__optionBasket:hover{
+    border: 1px solid #fff;
+    padding:4px;
   }
   
   .header__basketCount {
@@ -73,4 +80,24 @@
     margin-left: 10px;
     margin-right: 10px;
     color: white;
+  }
+  .header__option:hover{
+    border: 1px solid #fff;
+    padding:4px;
+  }
+
+  .loginButton {
+    display: block;
+    width: 200px;
+    height: 33px;
+    background: linear-gradient(to bottom, #f8e3ad,#eeba37);
+    text-align: center;
+    line-height: 30px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid;
+    border-color: #c89411 #b0820f #99710d;
+    border-radius: 3px;
+    margin-top: 3%;
   }

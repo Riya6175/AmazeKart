@@ -25,10 +25,10 @@ export default function ProductListPage(props) {
 
     const [priceRange, setpriceRange] = useState({
 
-        under5k: 5000,
-        under10k: 10000,
-        under20k: 20000,
-        under30k: 30000,
+        under5k: 'under 5000',
+        under10k: 'under 10000',
+        under20k: 'under 20000',
+        under30k: 'under 30000',
         above30k: "above 30000"
     }
     )
@@ -38,24 +38,28 @@ export default function ProductListPage(props) {
         dispatch(getProductBySlug(match.params.slug))
     }, [])
 
-    
 
     return (
         <Layout>
+            
             {Object.keys(product.productsByPrice).map((key, index) => {
+                
+                {if(product.productsByPrice[key].length != 0)
+                    { 
                 
                 return (
                     <div>
+                        
                             <div className="cardHeader">
-                            <div>{props.match.params.slug} Mobiles under {priceRange[key]}</div>
+                            <div>{`${props.match.params.slug} mobile under ${priceRange[key]}`}</div>
                             
                     </div>
-                    <Carousel breakPoints={breakPoints} disableArrowsOnEnd={false} style={{marginBottom:"1%",display:'none'}}>
-                    
-                            
+                    <Carousel breakPoints={breakPoints} disableArrowsOnEnd={false} style={{marginBottom:"1%"}}>
                             {
-                                product.productsByPrice[key].map(product =>
-                                    <Item>
+                                product.productsByPrice[key].map(product => 
+                                    
+                               
+                                   <Item>
                                         <div>
                                             <img src={generatePublicUrl(product.productPictures[0].img)} style={{height:"40vh"}} />
 
@@ -76,17 +80,18 @@ export default function ProductListPage(props) {
                                             <Button variant="outlined">view Details</Button>
                                         </div>
                                     </Item>
+                                    
+                                
                                 )
-                            }
-                        
-                        
-                        
+                            } 
                     </Carousel>
                     </div>
                 )
-            
-            })}
-            
+            }
+            }
+        }  )
+        }
+
         </Layout>
 
     )

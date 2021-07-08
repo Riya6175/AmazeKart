@@ -57,6 +57,14 @@ export default function SubHeader() {
                 <li>
                     New Releases
                 </li>
+                <li style={{padding:0}}>
+                <div className="dropdown-fake">
+                <button className="dropbtn">Prime</button>
+                    <div className="dropbtn-list">
+                        <img style={{padding:'2%'}}src="./images/prime.jpg"></img>
+                    </div>
+                </div>
+                </li>
                 <li>
                     Customer Service
                 </li>
@@ -66,16 +74,6 @@ export default function SubHeader() {
                 <li>
                     Best Sellers
                 </li>
-                <div className="dropdown-fake">
-
-                
-                <button className="dropbtn">Dropdown</button>
-                    <div className="dropbtn-list">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                    </div>
                 </ul>
                 </ul>
                 <Transition 

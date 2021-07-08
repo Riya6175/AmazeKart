@@ -4,7 +4,9 @@ import {useSelector, useDispatch} from 'react-redux'
 import { getAllCategory } from '../../actions';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import {
+  DropdownMenu,
+} from "../MaterialUi";
 export default function Header(props) {
 
   const category = useSelector(state => state.category);
@@ -52,7 +54,33 @@ export default function Header(props) {
         
           <div className="header__option">
             <span className="header__optionLineOne">Hello Guest</span>
-            <span className="header__optionLineTwo">Sign In</span>
+            
+            <DropdownMenu
+            menu={
+              <span className="header__optionLineTwo">
+                Account & Lists
+            </span>
+            }
+            menus={[
+              { label: 'Your Account', href: '', icon: null },
+              { label: 'Your Orders', href: '', icon: null },
+              { label: 'Your Wishlist', href: '', icon: null },
+              { label: 'Your Rewards', href: '', icon: null },
+              { label: 'Your Prime MemberShip', href: '', icon: null },
+              { label: 'Your Seller Account', href: '', icon: null },
+            ]}
+            firstMenu={
+              <>
+              <div style={{display:'flex',justifyContent:'center' }}>
+                <button className="loginButton" > Signin</button>
+              </div>
+              <div className="firstmenu">
+                
+                <span style={{color:"#000"}}>New Customer?</span>
+                <a style={{ color: '#2874f0', marginLeft:'2%' }}>Sign Up</a>
+              </div>
+              </>
+            }/>
           </div>
         
 
@@ -62,13 +90,6 @@ export default function Header(props) {
             <span className="header__optionLineTwo">& Orders</span>
           </div>
         
-        
-
-        <div className="header__option">
-          <span className="header__optionLineOne">Your</span>
-          <span className="header__optionLineTwo">Prime</span>
-        </div>
-
         
           <div className="header__optionBasket">
             <ShoppingCartIcon />
