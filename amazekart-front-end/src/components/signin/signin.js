@@ -9,14 +9,12 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import MuiPhoneNumber from "material-ui-phone-number";
+// import MuiPhoneNumber from "material-ui-phone-number";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Layout from "../../components/layout"
 import {login} from "../../actions"
 import {useDispatch, useSelector} from 'react-redux';
-// import { Redirect } from 'react-router';
 import{ Redirect } from "react-router-dom"
 
 
@@ -84,16 +82,11 @@ export default function Signin(props) {
 
     dispatch(login(user));
   }
-    
-  const classes = useStyles();
   
-  if(auth.authenticate){
-    return <Redirect to={"/category"}/>
-  }
-  return (
-      <Layout>
+  const classes = useStyles();
 
-      
+  return (
+       
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -150,6 +143,6 @@ export default function Signin(props) {
         <Copyright />
       </Box>
     </Container>
-    </Layout>
+    
   );
 }

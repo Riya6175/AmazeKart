@@ -4,13 +4,25 @@ import {useSelector, useDispatch} from 'react-redux'
 import { getAllCategory } from '../../actions';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import {Link} from "react-router-dom";
 import {
   DropdownMenu,
 } from "../MaterialUi";
+import Signin from '../signin/signin';
+import { login, signout, signup as _signup } from "../../actions";
+
+
 export default function Header(props) {
 
   const category = useSelector(state => state.category);
-     const dispatch = useDispatch()
+  const [signup, setSignup] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
 
 
      useEffect(() => {
@@ -32,6 +44,93 @@ export default function Header(props) {
         }
         return myCategories;
     }
+
+    const userSignup = () => {
+      const user = { firstName, lastName, email, password };
+      if (
+        firstName === "" ||
+        lastName === "" ||
+        email === "" ||
+        password === ""
+      ) {
+        return;
+      }
+  
+      dispatch(_signup(user));
+    };
+  
+    const userLogin = () => {
+      if (signup) {
+        userSignup();
+      } else {
+        dispatch(login({ email, password }));
+      }
+    };
+  
+    const logout = () => {
+      dispatch(signout());
+    };
+
+    const renderLoggedInMenu = () => {
+      return (
+        <DropdownMenu
+          menu={<a className="fullName">Riya</a>}
+          menus={[
+            { label: "My Profile", href: "", icon: null },
+            { label: "SuperCoin Zone", href: "", icon: null },
+            { label: "Flipkart Plus Zone", href: "", icon: null },
+            {
+              label: "Orders",
+              href: `/account/orders`,
+              icon: null,
+            },
+            { label: "Wishlist", href: "", icon: null },
+            { label: "My Chats", href: "", icon: null },
+            { label: "Coupons", href: "", icon: null },
+            { label: "Rewards", href: "", icon: null },
+            { label: "Notifications", href: "", icon: null },
+            { label: "Gift Cards", href: "", icon: null },
+            { label: "Logout", href: "", icon: null },
+          ]}
+        />
+      );
+    };
+  
+    const renderNonLoggedInMenu = () => {
+      return (
+        <DropdownMenu
+        menu={
+          <span className="header__optionLineTwo">
+            Account & Lists
+        </span>
+        }
+        menus={[
+          { label: 'Your Account', href: '', icon: null },
+          { label: 'Your Orders', href: '', icon: null },
+          { label: 'Your Wishlist', href: '', icon: null },
+          { label: 'Your Rewards', href: '', icon: null },
+          { label: 'Your Prime MemberShip', href: '', icon: null },
+          { label: 'Your Seller Account', href: '', icon: null },
+        ]}
+          firstMenu={
+            <>
+            <div style={{display:'flex',justifyContent:'center' }}>
+              <a href='/signin'>
+              <button className="loginButton"> Signin</button>
+              </a>
+            </div>
+            <div className="firstmenu">
+              
+              <span style={{color:"#000"}}>New Customer?</span>
+              <a href="/signup" style={{ color: '#2874f0', marginLeft:'2%' }}>Sign Up</a>
+            </div>
+            </>
+          }
+        />
+      );
+    };
+
+
     return (
     <div className="header">
       
@@ -54,7 +153,7 @@ export default function Header(props) {
         
           <div className="header__option">
             <span className="header__optionLineOne">Hello Guest</span>
-            
+            {/* {auth.authenticate ? renderLoggedInMenu() : renderNonLoggedInMenu()} */}
             <DropdownMenu
             menu={
               <span className="header__optionLineTwo">
@@ -72,12 +171,14 @@ export default function Header(props) {
             firstMenu={
               <>
               <div style={{display:'flex',justifyContent:'center' }}>
-                <button className="loginButton" > Signin</button>
+                <a href='/signin'>
+                <button className="loginButton"> Signin</button>
+                </a>
               </div>
               <div className="firstmenu">
                 
                 <span style={{color:"#000"}}>New Customer?</span>
-                <a style={{ color: '#2874f0', marginLeft:'2%' }}>Sign Up</a>
+                <a href="/signup" style={{ color: '#2874f0', marginLeft:'2%' }}>Sign Up</a>
               </div>
               </>
             }/>

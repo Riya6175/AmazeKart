@@ -1,15 +1,30 @@
 import React from 'react'
+import {Route, withRouter} from 'react-router-dom'
 import Header from '../Header'
 import MenuHeader from '../subheader2'
 import SubHeader from '../subheader'
+import {BrowserRouter as Router,Switch} from 'react-router-dom'
 
-export default function Layout(props) {
+ function Layout(props) {
     return (
         <>
-            <Header/>
-            <SubHeader/>
-            <MenuHeader/>
+            <Router>
+                <div className="app-wrapper">
+                {
+                props.location.pathname!=='/signin' && props.location.pathname!=='/signup' ? 
+                <>
+                 <Header/>
+                 <SubHeader/>
+                <MenuHeader/>
+                 </>
+                  :null
+                
+                }
+                </div>
+            </Router>
+            
             {props.children}
         </>
     )
 }
+export default withRouter(Layout);

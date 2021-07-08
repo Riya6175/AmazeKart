@@ -41,7 +41,6 @@ export default function ProductListPage(props) {
 
     return (
         <Layout>
-            
             {Object.keys(product.productsByPrice).map((key, index) => {
                 
                 {if(product.productsByPrice[key].length != 0)
@@ -91,8 +90,6 @@ export default function ProductListPage(props) {
             }
         }  )
         }
-
         </Layout>
-
     )
 }
