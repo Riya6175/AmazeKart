@@ -30,10 +30,10 @@
   }
   
   .header__searchInput {
-    height: 12px;
+    height: 12px !important;
     padding: 10px;
     border: none;
-    width: 100%;
+    width: 85%;
   }
   
   .header__searchIcon {
@@ -84,6 +84,11 @@
   .header__option:hover{
     border: 1px solid #fff;
     padding:4px;
+  }
+
+  .name{
+    font-weight: bold;
+    font-size: 0.7rem;
   }
 
   .loginButton {

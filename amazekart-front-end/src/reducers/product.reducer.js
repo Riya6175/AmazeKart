@@ -2,14 +2,9 @@ import { productConstants } from "../actions/constants"
 
 const initState = {
     products : [],
-    productsByPrice:{
-        under5k:[],
-        under10k:[],
-        under15k:[],
-        under20k:[],
-        under25k:[],
-        under30k:[],
-    }
+    productsByPrice:{},
+    productDetails: {},
+    loading: false,
 } 
 
 export default(state = initState,action) => {
@@ -23,6 +18,27 @@ export default(state = initState,action) => {
                 }
             }
             break;
+            case productConstants.GET_PRODUCT_DETAILS_BY_ID_REQUEST:
+      state = {
+        ...state,
+        loading: true,
+      };
+      break;
+    case productConstants.GET_PRODUCT_DETAILS_BY_ID_SUCCESS:
+      state = {
+        ...state,
+        loading: false,
+        productDetails: action.payload.productDetails,
+      };
+      break;
+    case productConstants.GET_PRODUCT_DETAILS_BY_ID_FAILURE:
+      state = {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
+      break;
+  
     }
     return state;
 }

@@ -136,7 +136,7 @@ export default function Signin(props) {
           </Button>
           <Grid container justify="center">
             <Grid item>
-              <Link href="/signUp" variant="body2">
+              <Link href="/signup" variant="body2">
                   
                 Don't have an account? Create a new one.
               </Link>

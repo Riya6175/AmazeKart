@@ -66,6 +66,10 @@ export default function Header(props) {
         dispatch(login({ email, password }));
       }
     };
+
+    useEffect(() => {
+
+    },[auth.authenticate]);
   
     const logout = () => {
       dispatch(signout());
@@ -73,31 +77,32 @@ export default function Header(props) {
 
     const renderLoggedInMenu = () => {
       return (
+        <div className="header__option">
+        <span className="name"> Welcome {auth.user.firstName}</span>
         <DropdownMenu
-          menu={<a className="fullName">Riya</a>}
-          menus={[
-            { label: "My Profile", href: "", icon: null },
-            { label: "SuperCoin Zone", href: "", icon: null },
-            { label: "Flipkart Plus Zone", href: "", icon: null },
-            {
-              label: "Orders",
-              href: `/account/orders`,
-              icon: null,
-            },
-            { label: "Wishlist", href: "", icon: null },
-            { label: "My Chats", href: "", icon: null },
-            { label: "Coupons", href: "", icon: null },
-            { label: "Rewards", href: "", icon: null },
-            { label: "Notifications", href: "", icon: null },
-            { label: "Gift Cards", href: "", icon: null },
-            { label: "Logout", href: "", icon: null },
-          ]}
+        menu={
+          <span className="header__optionLineTwo">
+            Account & Lists
+        </span>
+        }
+        menus={[
+          { label: 'Your Account', href: '', icon: null },
+          { label: 'Your Orders', href: '', icon: null },
+          { label: 'Your Wishlist', href: '', icon: null },
+          { label: 'Your Rewards', href: '', icon: null },
+          { label: 'Your Prime MemberShip', href: '', icon: null },
+          { label: 'Your Seller Account', href: '', icon: null },
+          { label: 'Log Out', href: '', icon: null, onClick:logout},
+        ]}
         />
+      </div>
       );
     };
   
     const renderNonLoggedInMenu = () => {
       return (
+        <div className="header__option">
+        <span className="header__optionLineOne">Hello Guest</span>
         <DropdownMenu
         menu={
           <span className="header__optionLineTwo">
@@ -112,21 +117,21 @@ export default function Header(props) {
           { label: 'Your Prime MemberShip', href: '', icon: null },
           { label: 'Your Seller Account', href: '', icon: null },
         ]}
-          firstMenu={
-            <>
-            <div style={{display:'flex',justifyContent:'center' }}>
-              <a href='/signin'>
-              <button className="loginButton"> Signin</button>
-              </a>
-            </div>
-            <div className="firstmenu">
-              
-              <span style={{color:"#000"}}>New Customer?</span>
-              <a href="/signup" style={{ color: '#2874f0', marginLeft:'2%' }}>Sign Up</a>
-            </div>
-            </>
-          }
-        />
+        firstMenu={
+          <>
+          <div style={{display:'flex',justifyContent:'center' }}>
+            <a href='/signin'>
+            <button className="loginButton" onClick={userLogin}> Signin</button>
+            </a>
+          </div>
+          <div className="firstmenu">
+            
+            <span style={{color:"#000"}}>New Customer?</span>
+            <a href="/signup" style={{ color: '#2874f0', marginLeft:'2%' }}>Sign Up</a>
+          </div>
+          </>
+        }/>
+      </div>
       );
     };
 
@@ -136,7 +141,7 @@ export default function Header(props) {
       
         <img
           className="header__logo"
-          src="./images/Amazon Logo (1).png"
+          src="/images/Amazon Logo (1).png"
         />
         <div className='logo_name' style={{color:'#fff',padding:'2% 2% 2% 0',fontSize:'1.5rem',fontWeight:'bold'}}> AmazeKart </div>
 
@@ -150,42 +155,7 @@ export default function Header(props) {
       </div>
 
       <div className="header__nav">
-        
-          <div className="header__option">
-            <span className="header__optionLineOne">Hello Guest</span>
-            {/* {auth.authenticate ? renderLoggedInMenu() : renderNonLoggedInMenu()} */}
-            <DropdownMenu
-            menu={
-              <span className="header__optionLineTwo">
-                Account & Lists
-            </span>
-            }
-            menus={[
-              { label: 'Your Account', href: '', icon: null },
-              { label: 'Your Orders', href: '', icon: null },
-              { label: 'Your Wishlist', href: '', icon: null },
-              { label: 'Your Rewards', href: '', icon: null },
-              { label: 'Your Prime MemberShip', href: '', icon: null },
-              { label: 'Your Seller Account', href: '', icon: null },
-            ]}
-            firstMenu={
-              <>
-              <div style={{display:'flex',justifyContent:'center' }}>
-                <a href='/signin'>
-                <button className="loginButton"> Signin</button>
-                </a>
-              </div>
-              <div className="firstmenu">
-                
-                <span style={{color:"#000"}}>New Customer?</span>
-                <a href="/signup" style={{ color: '#2874f0', marginLeft:'2%' }}>Sign Up</a>
-              </div>
-              </>
-            }/>
-          </div>
-        
-
-        
+      {auth.authenticate ? renderLoggedInMenu() : renderNonLoggedInMenu()}
           <div className="header__option">
             <span className="header__optionLineOne">Returns</span>
             <span className="header__optionLineTwo">& Orders</span>

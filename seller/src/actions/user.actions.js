@@ -1,7 +1,7 @@
 import axiosInstance from "../helpers/axios"
 import { authConstants, userConstants } from "./constants"
 
-export const Signup = (user) => {
+export const signup = (user) => {
     console.log(user)
     return async (dispatch) => {
 

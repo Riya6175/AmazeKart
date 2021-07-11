@@ -8,7 +8,6 @@ import {BrowserRouter as Router,Switch} from 'react-router-dom'
  function Layout(props) {
     return (
         <>
-            <Router>
                 <div className="app-wrapper">
                 {
                 props.location.pathname!=='/signin' && props.location.pathname!=='/signup' ? 
@@ -21,8 +20,6 @@ import {BrowserRouter as Router,Switch} from 'react-router-dom'
                 
                 }
                 </div>
-            </Router>
-            
             {props.children}
         </>
     )

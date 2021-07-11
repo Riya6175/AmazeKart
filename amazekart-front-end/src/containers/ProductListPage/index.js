@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProductBySlug } from '../../actions/product.action'
 import Carousel from "react-elastic-carousel";
 import Layout from '../../components/Layout/layout'
-import Sidebar from '../../components/products/sidebar';
 import { generatePublicUrl } from '../../urlConfig';
 import Button from '@material-ui/core/Button';
 import './style.css';
 import Item from "./Item";
 import { getAllCategory } from '../../actions';
+import { Link} from 'react-router-dom';
 
 const breakPoints = [
     { width: 1, itemsToShow: 1 },
@@ -56,8 +56,6 @@ export default function ProductListPage(props) {
                     <Carousel breakPoints={breakPoints} disableArrowsOnEnd={false} style={{marginBottom:"1%"}}>
                             {
                                 product.productsByPrice[key].map(product => 
-                                    
-                               
                                    <Item>
                                         <div>
                                             <img src={generatePublicUrl(product.productPictures[0].img)} style={{height:"40vh"}} />
@@ -76,11 +74,11 @@ export default function ProductListPage(props) {
                                                 </span>
                                             </div>
                                             <div> Rs. {product.price} </div>
+                                            <Link to={`/${product.slug}/${product._id}/p`}>
                                             <Button variant="outlined">view Details</Button>
+                                            </Link>
                                         </div>
                                     </Item>
-                                    
-                                
                                 )
                             } 
                     </Carousel>

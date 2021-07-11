@@ -17,7 +17,7 @@ import Category from "./container/category/category";
 function App() {
 
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector(state => state.auth)
 
   useEffect(() => {
     if(!auth.authenticate){
@@ -25,7 +25,8 @@ function App() {
     }
     dispatch(getInitialData());
     
-}, [])
+}, [auth.authenticate])
+
   return (
     <div className="App">
       
@@ -33,6 +34,9 @@ function App() {
           <PrivateRoute path="/seller" exact component={home} />
           <PrivateRoute path="/products"  component={Products} />
           <PrivateRoute path="/category"  component={Category} />
+
+
+          
           <Route path='/' exact component={landing}/>
           <Route path="/signin" component={signin} />
           <Route path="/signup" component={signup} />

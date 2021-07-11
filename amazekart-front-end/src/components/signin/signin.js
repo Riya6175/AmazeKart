@@ -84,6 +84,9 @@ export default function Signin(props) {
   }
   
   const classes = useStyles();
+  if(auth.authenticate){
+    return <Redirect to={"/"}/>
+  }
 
   return (
        
