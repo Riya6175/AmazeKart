@@ -15,6 +15,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { generatePublicUrl } from '../../urlConfig';
 import { BiRupee } from "react-icons/bi";
 import './style.css'
+import Cart from "../../components/UI/Cart";
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -61,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
     const [state, setState] = React.useState({
         'right': false,
     });
+    const cart = useSelector((state) => state.cart);
 
     useEffect(() => {
         const { productId } = props.match.params;
@@ -107,6 +109,7 @@ const useStyles = makeStyles((theme) => ({
                         </div>
                         
                     </div>
+                    <Cart count={Object.keys(cart.cartItems).length} style={{color:"black",display:"block"}} />
                 </>
             </List>
             <Divider />

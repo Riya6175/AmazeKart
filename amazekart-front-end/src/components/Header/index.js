@@ -141,13 +141,15 @@ export default function Header(props) {
 
     return (
     <div className="header">
-      
+      <Link to = "/" >
         <img
           className="header__logo"
           src="/images/Amazon Logo (1).png"
         />
+        </Link>
+        <Link to = "/" >
         <div className='logo_name' style={{color:'#fff',padding:'2% 2% 2% 0',fontSize:'1.5rem',fontWeight:'bold'}}> AmazeKart </div>
-
+        </Link>
       <div className="header__search">
         <select className="header_categories" name="categories">
           <option>All</option>

@@ -1,5 +1,4 @@
 import React from "react";
-import { IoIosCart } from "react-icons/io";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 /**
@@ -15,16 +14,20 @@ const Cart = (props) => {
           position: "absolute",
           width: "15px",
           height: "15px",
-          fontSize: "12px",
+          fontSize: "14px",
           textAlign: "center",
           alignSelf: "center",
-          top: "-14px",
-          right: "3px",
+          top: "-11px",
+          right: "15px",
+          color:'white',
+          // backgroundColor:"#f89501",
+          // border: "1px solid #fff",
+          // borderRadius: "5px",
         }}
       >
         {props.count}
       </span>
-      <ShoppingCartIcon />
+      <ShoppingCartIcon style={{ color:"white", paddingTop:"4%", fontSize:'2rem',width:'1.5em'}} />
     </div>
   );
 };

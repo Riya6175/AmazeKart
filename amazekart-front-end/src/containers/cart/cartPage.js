@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from '../../components/Layout/layout'
-import Card from "../../components/UI/card";
+import Card from "../../components/UI/Card";
 import CartItem from "./CartItem/index";
 import { addToCart, getCartItems, removeCartItem } from "../../actions";
 import PriceDetails from "../../components/priceDetails";
