@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetailsById } from '../../actions';
 import Layout from '../../components/Layout/layout'
 import { IoIosArrowForward, IoIosStar, IoMdCart } from "react-icons/io";
 import { BiRupee } from "react-icons/bi";
-import { AiFillThunderbolt } from "react-icons/ai";
 import { MaterialButton } from "../../components/MaterialUi";
+import Button from '@material-ui/core/Button';
 import { generatePublicUrl } from '../../urlConfig';
 import "./style.css";
+import { addToCart } from "../../actions";
+import TemporaryDrawer from "../cart/sideslider";
 
 export default function ProductDetails(props) {
 
     const dispatch = useDispatch();
+    const [slider, setSlider] = useState()
     const product = useSelector(state => state.product)
     useEffect(() => {
         const { productId } = props.match.params;
@@ -25,6 +28,7 @@ export default function ProductDetails(props) {
     if (Object.keys(product.productDetails).length === 0) {
         return null;
       }
+
     return (
         <Layout>
             {/* <div>{product.productDetails.name}</div> */}
@@ -46,31 +50,28 @@ export default function ProductDetails(props) {
                         </div>
 
                         {/* action buttons */}
-                        <div className="flexRow">
-                            <MaterialButton
-                                title="ADD TO CART"
-                                bgColor="#ffd814"
-                                textColor="#000"
-                                style={{
+                        <div className="flexRowbtns">
+                            <button
+                                className="buynow"
+                            >
+                            Buy Now</button>
+                            {/* <MaterialButton
+                                    title="ADD TO CART"
+                                    bgColor="#ff9f00"
+                                    textColor="#ffffff"
+                                    style={{
                                     marginRight: "5px",
-                                }}
-                                
-                                // onClick={() => {
-                                //     const { _id, name, price } = product.productDetails;
-                                //     const img = product.productDetails.productPictures[0].img;
-                                //     dispatch(addToCart({ _id, name, price, img }));
-                                //     props.history.push(`/cart`);
-                                // }}
-                            />
-                            <MaterialButton
-                                title="BUY NOW"
-                                bgColor="#fb641b"
-                                textColor="#000"
-                                style={{
-                                    marginLeft: "5px",
-                                }}
-                                
-                            />
+                                    }}
+                                    icon={<IoMdCart />}
+                                    onClick={() => {
+                                    const { _id, name, price } = product.productDetails;
+                                    const img = product.productDetails.productPictures[0].img;
+                                    dispatch(addToCart({ _id, name, price, img }));
+                                    props.history.push(`/cart`);
+                                    }}
+                                    
+                                /> */}
+                            <TemporaryDrawer />
                         </div>
                     </div>
                 </div>
@@ -158,3 +159,4 @@ export default function ProductDetails(props) {
         </Layout>
     )
 }
+

@@ -3,13 +3,14 @@ import './style.css'
 import {useSelector, useDispatch} from 'react-redux'
 import { getAllCategory } from '../../actions';
 import SearchIcon from '@material-ui/icons/Search';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 import {Link} from "react-router-dom";
 import {
   DropdownMenu,
 } from "../MaterialUi";
 import Signin from '../signin/signin';
 import { login, signout, signup as _signup } from "../../actions";
+import Cart from "../UI/Cart";
 
 
 export default function Header(props) {
@@ -23,6 +24,8 @@ export default function Header(props) {
   const [error, setError] = useState("");
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch()
+
+  const cart = useSelector((state) => state.cart);
 
 
      useEffect(() => {
@@ -163,10 +166,9 @@ export default function Header(props) {
         
         
           <div className="header__optionBasket">
-            <ShoppingCartIcon />
-            <span className="header__optionLineTwo header__basketCount">
-              0
-            </span>
+            <a href={`/cart`} className="cart">
+              <Cart count={Object.keys(cart.cartItems).length} />
+            </a>
           </div>
         
       </div>
