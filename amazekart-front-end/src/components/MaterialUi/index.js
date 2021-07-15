@@ -116,6 +116,7 @@ const DropdownMenu = (props) => {
             backgroundColor: props.bgColor,
             color: props.textColor,
             fontSize: props.fontSize,
+            marginBottom: props.marginBottom
           }}
           onClick={onClick}
         >

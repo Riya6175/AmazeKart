@@ -16,9 +16,9 @@ function SideNavRow(props) {
 
     return (
         <>
+        
         <div className="sidenavRow" onClick={() => (props.entries && openRow())}>
             <div>{props.text}</div>
-            
             <i className="fas fa-chevron-right"></i>
         </div>
         

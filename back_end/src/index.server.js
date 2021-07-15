@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 const path= require("path")
 const cors = require("cors")
+const razorpay = require('razorpay');
 
 //routes
 const authRoutes = require('./routes/auth')
@@ -49,6 +50,22 @@ app.use("/api",cartRoutes)
 app.use("/api",initialDataRoutes)
 app.use("/api", addressRoutes);
 app.use("/api", orderRoutes);
+
+app.post(`/api/verify/razorpay-signature`,(req,res) => {
+
+    console.log(JSON.stringify(req.body));
+    const crypto = require('crypto');
+    const hash = crypto.createHmac('SHA256', "riyasoni").update(req.body).digest('hex');
+    console.log(hash);
+    console.log(req.headers["x-razorpay-signature"]);
+    if(hash === req.headers["x-razorpay-signature"]){
+        console.log("hello");
+    }else{
+        console.log("fail");
+    }
+    res.status(200)
+
+})
 
 
 app.listen(process.env.PORT, ()=>{

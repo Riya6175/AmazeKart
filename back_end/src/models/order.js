@@ -7,6 +7,9 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    paymentId:{
+      type: String
+    },
     addressId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "UserAddress.address",
@@ -39,7 +42,7 @@ const orderSchema = new mongoose.Schema(
     },
     paymentType: {
       type: String,
-      enum: ["cod", "card"],
+      enum: ["cod", "online"],
       required: true,
     },
     orderStatus: [

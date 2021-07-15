@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import './style.css'
 import Layout from '../../components/Layout/layout'
-import Product from "./dummyProducts.js";
+import {Product,RealProduct} from "./dummyProducts.js";
+import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom"
 
 export default function HomePage(props) {
 
+  const history = useHistory();
     return (
         <Layout>
             <div className="home">
@@ -55,15 +58,44 @@ export default function HomePage(props) {
             image="https://images-na.ssl-images-amazon.com/images/I/816ctt5WV5L._AC_SX385_.jpg"
           />
         </div>
-
+        <div className="title_row">
+          Electronics- Mobile Phones
+        </div>
         <div className="home__row">
-          <Product
+          
+          <RealProduct
             id="90829332"
-            title="Samsung LC49RG90SSUXEN 49' Curved LED Gaming Monitor - Super Ultra Wide Dual WQHD 5120 x 1440"
-            price={1094.98}
-            rating={4}
-            image="https://images-na.ssl-images-amazon.com/images/I/6125mFrzr6L._AC_SX355_.jpg"
+            image="./images/Samsung-logo.jpg"
+            link="/Samsung"
           />
+          <RealProduct
+            id="90829332"
+            image="./images/vivo.PNG"
+          />
+          <RealProduct
+            id="90829332"
+            image="./images/oppo.PNG"
+          />    
+
+
+
+        </div>
+        <div className="title_row">
+          Electronics- Laptops
+        </div>
+        <div className="home__row">
+          <RealProduct
+            id="90829332"
+            image="./images/Samsung-logo.jpg"
+          />
+          <RealProduct
+            id="90829332"
+            image="./images/vivo.PNG"
+          />
+          <RealProduct
+            id="90829332"
+            image="./images/oppo.PNG"
+          />          
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addOrder, getAddress, getCartItems } from "../../actions";
+import { addOrder, getAddress, getCartItems,getOrders  } from "../../actions";
 import Layout from "../../components/Layout/layout";
 import {
   Anchor,
@@ -13,13 +13,32 @@ import AddressForm from "./AddressForm";
 import Card from "../../components/UI/Card";
 import "./style.css";
 import EditIcon from '@material-ui/icons/Edit';
+import { Link } from "react-router-dom";
 
 /**
  * @author
  * @function CheckoutPage
  **/
 
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement('script')
+    script.src = src
+    
+    script.onload =  () => {
+      resolve(true)
+    }
+    script.onerror = () => {
+      resolve(false)
+    }
+    document.body.appendChild(script)
+  })
+
+}
+
 const CheckoutStep = (props) => {
+
+
   return (
     <div className="checkoutStep">
       <div
@@ -58,10 +77,10 @@ const Address = ({
                 <span className="addressMobileNumber">{adr.mobileNumber}</span>
               </div>
               {adr.selected && (
-                
-                <EditIcon onClick={() => enableAddressEditForm(adr)}/>
+
+                <EditIcon onClick={() => enableAddressEditForm(adr)} />
               )}
-              
+
             </div>
             <div className="fullAddress">
               {adr.address} <br /> {`${adr.state} - ${adr.pinCode}`}
@@ -73,8 +92,8 @@ const Address = ({
                 style={{
                   width: "150px",
                   margin: "10px 0",
-                  bgcolor:"#cd9042",
-                  fontSize:'10px'
+                  bgcolor: "#cd9042",
+                  fontSize: '10px'
                 }}
               />
             )}
@@ -84,7 +103,7 @@ const Address = ({
             withoutLayout={true}
             onSubmitForm={onAddressSubmit}
             initialData={adr}
-            onCancel={() => {}}
+            onCancel={() => { }}
           />
         )}
       </div>
@@ -103,8 +122,18 @@ const CheckoutPage = (props) => {
   const [orderConfirmation, setOrderConfirmation] = useState(false);
   const [paymentOption, setPaymentOption] = useState(false);
   const [confirmOrder, setConfirmOrder] = useState(false);
+  const [payment, setPayment] = useState(false);
+  const[orderId, setOrderId] = useState("");
+  const[paymentId, setPaymentId]=useState("");
+  const [signature, setSignature] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState("pending");
+
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrders());
+  }, []);
 
   const onAddressSubmit = (addr) => {
     setSelectedAddress(addr);
@@ -149,6 +178,9 @@ const CheckoutPage = (props) => {
       },
       0
     );
+
+    
+
     const items = Object.keys(cart.cartItems).map((key) => ({
       productId: key,
       payablePrice: cart.cartItems[key].price,
@@ -158,10 +190,10 @@ const CheckoutPage = (props) => {
       addressId: selectedAddress._id,
       totalAmount,
       items,
-      paymentStatus: "pending",
-      paymentType: "cod",
+      paymentStatus: paymentStatus,
+      paymentType: document.querySelector('input[name="paymentOption"]:checked').value
+      //document.querySelector('input[name="paymentOption"]:checked').value
     };
-
     console.log(payload);
     dispatch(addOrder(payload));
     setConfirmOrder(true);
@@ -188,6 +220,51 @@ const CheckoutPage = (props) => {
     }
   }, [user.placedOrderId]);
 
+  
+
+
+  async function displayRazorpay() {
+
+    var totaldPrice=Object.keys(cart.cartItems).reduce((totalPrice, key) => {
+      const { price, qty } = cart.cartItems[key];
+      return totalPrice + price * qty;
+    }, 0)
+  
+
+    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
+    if(!res){
+      alert("Check wheter you are online");
+    }
+    console.log(user.orders._id);
+
+    const options = {
+      "key": "rzp_test_VEREhdqakajV8s", // Enter the Key ID generated from the Dashboard //secret: jdHks6RLrtnwAOJA3GekMtvf
+      "amount": totaldPrice * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "AmazeKart",
+      "description": "Thank you for buying the products",
+      "image": "./images/Amazon Logo.png",
+      "order_id": user.orders._id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response){
+          alert(response.razorpay_payment_id);
+          alert(response.razorpay_order_id);
+          alert(response.razorpay_signature)
+          setOrderId(response.razorpay_order_id);
+          setPaymentId(response.razorpay_payment_id);
+          setSignature(response.razorpay_signature);
+          setPayment(true);
+          setPaymentStatus("completed");
+      },
+      "prefill": {
+          "name": auth.user.fullName,
+          "email": auth.user.email,
+          "contact": "9999999999"
+      }
+  };
+  const paymentObject = new window.Razorpay(options);
+  paymentObject.open();
+  }
+
   return (
     <Layout>
       <div className="cartContainer" style={{ alignItems: "flex-start" }}>
@@ -205,7 +282,16 @@ const CheckoutPage = (props) => {
                 </div>
               ) : (
                 <div>
-                  <MaterialInput label="Email" />
+
+                  <Link to="/Signin">
+                    <MaterialButton
+                      title="Login"
+                      style={{
+                        width: "100px",
+                        margin: "2%",
+                      }}
+                    />
+                  </Link>
                 </div>
               )
             }
@@ -235,7 +321,7 @@ const CheckoutPage = (props) => {
 
           {/* AddressForm */}
           {confirmAddress ? null : newAddress ? (
-            <AddressForm onSubmitForm={onAddressSubmit} onCancel={() => {}} />
+            <AddressForm onSubmitForm={onAddressSubmit} onCancel={() => { }} />
           ) : auth.authenticate ? (
             <CheckoutStep
               stepNumber={"+"}
@@ -302,8 +388,19 @@ const CheckoutPage = (props) => {
                       padding: "20px",
                     }}
                   >
-                    <input type="radio" name="paymentOption" value="cod" />
-                    <div>Cash on delivery</div>
+                    <input type="radio" id="cod" name="paymentOption" value="cod" />
+                    <label for="cod">Cash on delivery</label>
+                    <input type="radio" id="online" name="paymentOption" value="online" onClick={displayRazorpay} />
+                    <label for="online">Pay via Razorpay</label>
+                  </div>
+                  <div>
+                    {payment && (
+                      <>
+                      <p>Payment Id: {paymentId}</p>
+                      <p>order Id: {orderId}</p>
+                      <p>Signature: {signature}</p>
+                      </>
+                    )}
                   </div>
                   <MaterialButton
                     title="CONFIRM ORDER"

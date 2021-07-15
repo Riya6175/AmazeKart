@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetailsById } from '../../actions';
 import Layout from '../../components/Layout/layout'
@@ -10,6 +10,9 @@ import { generatePublicUrl } from '../../urlConfig';
 import "./style.css";
 import { addToCart } from "../../actions";
 import TemporaryDrawer from "../cart/sideslider";
+import ReactImageMagnify from 'react-image-magnify';
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
+import InnerImageZoom from 'react-inner-image-zoom'
 
 export default function ProductDetails(props) {
 
@@ -27,7 +30,11 @@ export default function ProductDetails(props) {
     }, [])
     if (Object.keys(product.productDetails).length === 0) {
         return null;
-      }
+    }
+
+    const imageProps = {
+
+    };
 
     return (
         <Layout>
@@ -43,10 +50,25 @@ export default function ProductDetails(props) {
                     </div>
                     <div className="productDescContainer">
                         <div className="productDescImgContainer">
-                            <img
+                            <img id="myimage"
                                 src={generatePublicUrl(product.productDetails.productPictures[0].img)}
                                 alt={`${product.productDetails.productPictures[0].img}`}
                             />
+                            {/* <ReactImageMagnify {...{
+                                smallImage: {
+                                    alt: 'Phasellus laoreet',
+                                    isFluidWidth: true,
+                                    src: generatePublicUrl(product.productDetails.productPictures[0].img),
+                                    
+                                },
+                                largeImage: {
+                                    src: generatePublicUrl(product.productDetails.productPictures[1].img),
+                                    width: 1200,
+                                    height: 1800
+                                },
+                                isHintEnabled: true
+                            }} /> */}
+                            {/* <InnerImageZoom src={generatePublicUrl(product.productDetails.productPictures[0].img)} /> */}
                         </div>
 
                         {/* action buttons */}
@@ -54,7 +76,7 @@ export default function ProductDetails(props) {
                             <button
                                 className="buynow"
                             >
-                            Buy Now</button>
+                                Buy Now</button>
                             {/* <MaterialButton
                                     title="ADD TO CART"
                                     bgColor="#ff9f00"

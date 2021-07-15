@@ -32,6 +32,7 @@
     width: 485px;
 }
 .productDescImgContainer{
+    
     width: 485px;
     height: 440px;
     overflow: hidden;
@@ -120,3 +121,5 @@
 .flexRowbtns{
     display: flex;
 }
+
+

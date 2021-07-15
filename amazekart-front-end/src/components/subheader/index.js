@@ -37,6 +37,7 @@ export default function SubHeader() {
                 <li key={category.name}>
                     {
                         category.parentId ? <a href={category.slug}> {category.name} </a> : 
+                        
                         <button>{category.name}</button>
                     }
                     
@@ -51,7 +52,7 @@ export default function SubHeader() {
             <div className='menuHeader'>
                  
                 <ul>
-                <HamburgerButton click={openNav} /> <h4 style={{marginTop:'0.5%',fontWeight:'bold'}}>All</h4>
+                <HamburgerButton click={openNav} /> <h4 style={{marginTop:'0.7%',fontWeight:'bold'}}>All</h4>
                 {category.categories.length > 0 ? renderCategories(category.categories): null }
                 <ul className="fake-list">
                 <li>
