@@ -74,10 +74,8 @@ export default function ProductDetails(){
             <TableCell className={classes.Heading}>Product Name</TableCell>
 
             <TableCell className={classes.Heading}>
-            <TableSortLabel 
-            active={orderBy === (price)} 
-            direction={orderBy === (product.price) ? order : 'asc'} 
-            onClick = {() => {handleSortRequest(product.price)}}>
+            <TableSortLabel >
+            
               Price
             </TableSortLabel>
             </TableCell>
@@ -124,7 +122,7 @@ export default function ProductDetails(){
           }
         </TableBody>
       </TblContainer>
-      <TblPagination/>
+      
     </>
   )
 

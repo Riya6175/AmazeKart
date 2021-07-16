@@ -117,3 +117,7 @@
 .materialInput .label.focus{
   top: -20px !important;
 }
+
+.breed{
+  margin-bottom: 2%;
+}

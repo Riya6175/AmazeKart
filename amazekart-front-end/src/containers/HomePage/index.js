@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 
 export default function HomePage(props) {
 
+  window.sessionStorage.setItem("location", window.location.pathname);
   const history = useHistory();
     return (
         <Layout>
@@ -71,10 +72,12 @@ export default function HomePage(props) {
           <RealProduct
             id="90829332"
             image="./images/vivo.PNG"
+            link="/vivo"
           />
           <RealProduct
             id="90829332"
             image="./images/oppo.PNG"
+            link="oppo"
           />    
 
 
@@ -86,15 +89,18 @@ export default function HomePage(props) {
         <div className="home__row">
           <RealProduct
             id="90829332"
-            image="./images/Samsung-logo.jpg"
+            image="./images/dell-logo.jpg"
+            link="/Dell"
           />
           <RealProduct
             id="90829332"
-            image="./images/vivo.PNG"
+            image="./images/hp-logo.jpg"
+            link="/HP"
           />
           <RealProduct
             id="90829332"
-            image="./images/oppo.PNG"
+            image="./images/msi-logo.jpg"
+            link="/MSI"
           />          
         </div>
       </div>

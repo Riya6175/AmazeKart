@@ -11,6 +11,8 @@ import {isUserLoggedIn, updateCart} from './actions'
 import ProductDetails from './containers/ProductDetails';
 import CartPage from './containers/cart/cartPage';
 import CheckoutPage from "./containers/CheckoutPage";
+import OrderPage from "./containers/OrderPage";
+import OrderDetailsPage from "./containers/OrderDetailsPage";
 
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
           <Route path="/" exact component={HomePage} />
           <Route path="/cart" component={CartPage} />
           <Route path="/checkout" component={CheckoutPage} />
+          <Route path="/account/orders" component={OrderPage} />
+          <Route path="/order_details/:orderId" component={OrderDetailsPage} />
           
           <Route path="/:productSlug/:productId/p" component={ProductDetails} />
           <Route path="/:slug" component={ProductListPage} />

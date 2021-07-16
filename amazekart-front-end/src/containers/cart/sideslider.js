@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 
  const TemporaryDrawer = (props) => {
+    window.sessionStorage.setItem("location", window.location.pathname);
     const classes = useStyles();
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product);
@@ -81,7 +82,10 @@ const useStyles = makeStyles((theme) => ({
         }
 
         setState({ ...state, [anchor]: open });
+        
     };
+
+    
 
     const list = (anchor) => (
         <div
@@ -127,8 +131,9 @@ const useStyles = makeStyles((theme) => ({
                         props.history.push(`/cart`);
                         }}
                 >
-                    Cart
+                   View Cart
                 </Button>
+                {/* <Link to="/checkout">
                 <Button
                     variant="contained"
                     className={classes.button2}
@@ -136,6 +141,7 @@ const useStyles = makeStyles((theme) => ({
                 >
                     Proceed to Checkout
                 </Button>
+                </Link> */}
             </List>
         </div>
     );
@@ -156,3 +162,5 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default withRouter(TemporaryDrawer);
+
+//={toggleDrawer(anchor, true)} 

@@ -131,6 +131,9 @@ const CheckoutPage = (props) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  window.sessionStorage.setItem("location", window.location.pathname);
+  
+
   useEffect(() => {
     dispatch(getOrders());
   }, []);
@@ -191,8 +194,8 @@ const CheckoutPage = (props) => {
       totalAmount,
       items,
       paymentStatus: paymentStatus,
-      paymentType: document.querySelector('input[name="paymentOption"]:checked').value
-      //document.querySelector('input[name="paymentOption"]:checked').value
+      paymentType: document.querySelector('input[name="paymentOption"]:checked').value,
+      paymentId: paymentId
     };
     console.log(payload);
     dispatch(addOrder(payload));
@@ -244,11 +247,11 @@ const CheckoutPage = (props) => {
       "name": "AmazeKart",
       "description": "Thank you for buying the products",
       "image": "./images/Amazon Logo.png",
-      "order_id": user.orders._id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "order_id": user.orders.placedOrderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       "handler": function (response){
-          alert(response.razorpay_payment_id);
-          alert(response.razorpay_order_id);
-          alert(response.razorpay_signature)
+          // alert(response.razorpay_payment_id);
+          // alert(response.razorpay_order_id);
+          // alert(response.razorpay_signature)
           setOrderId(response.razorpay_order_id);
           setPaymentId(response.razorpay_payment_id);
           setSignature(response.razorpay_signature);
@@ -261,8 +264,13 @@ const CheckoutPage = (props) => {
           "contact": "9999999999"
       }
   };
+  
   const paymentObject = new window.Razorpay(options);
   paymentObject.open();
+
+  paymentObject.on('payment.failed', function (response){
+    setPaymentStatus("cancelled");
+    });
   }
 
   return (
@@ -389,16 +397,14 @@ const CheckoutPage = (props) => {
                     }}
                   >
                     <input type="radio" id="cod" name="paymentOption" value="cod" />
-                    <label for="cod">Cash on delivery</label>
+                    <label for="cod" style={{marginRight:"3%"}}>Cash on delivery</label>
                     <input type="radio" id="online" name="paymentOption" value="online" onClick={displayRazorpay} />
-                    <label for="online">Pay via Razorpay</label>
+                    <label for="online"  >Pay via Razorpay</label>
                   </div>
                   <div>
                     {payment && (
                       <>
-                      <p>Payment Id: {paymentId}</p>
-                      <p>order Id: {orderId}</p>
-                      <p>Signature: {signature}</p>
+                      <p style={{margin:"3%"}}>Your Payment Id is: {paymentId}</p>
                       </>
                     )}
                   </div>

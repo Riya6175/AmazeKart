@@ -23,6 +23,7 @@ if logged in then add products to users cart database from localStorage
 */
 
 const CartPage = (props) => {
+  window.sessionStorage.setItem("location", window.location.pathname);
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
   // const cartItems = cart.cartItems;

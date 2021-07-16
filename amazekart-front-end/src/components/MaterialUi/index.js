@@ -127,4 +127,20 @@ const DropdownMenu = (props) => {
     );
   };
 
-  export {  DropdownMenu, Anchor, MaterialButton,  MaterialInput };
+  const Breed = (props) => {
+    return (
+      <div className="breed">
+        <ul>
+          {props.breed &&
+            props.breed.map((item, index) => (
+              <li key={index}>
+                <a href={item.href}>{item.name}</a>
+                {props.breedIcon}
+              </li>
+            ))}
+        </ul>
+      </div>
+    );
+  };
+
+  export {  DropdownMenu, Anchor, MaterialButton,  MaterialInput,Breed };

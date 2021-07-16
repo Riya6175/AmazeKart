@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {login} from "../../actions"
 import {useDispatch, useSelector} from 'react-redux';
-import{ Redirect } from "react-router-dom"
+import{ Redirect, useHistory, useLocation, } from "react-router-dom"
 
 
 
@@ -84,8 +84,17 @@ export default function Signin(props) {
   }
   
   const classes = useStyles();
+  let location = useLocation();
+  let history = useHistory();
+  
   if(auth.authenticate){
-    return <Redirect to={"/"}/>
+    // let currlocElements =  document.referrer.split("/"); 
+    // let currloc = (currlocElements[3]);
+    // //let loc = `/ ${currloc}`
+    // return <Redirect to= {currloc}/>
+      window.history.back();
+    //  window.history.forward()
+    //window.history.go(-1);
   }
 
   return (

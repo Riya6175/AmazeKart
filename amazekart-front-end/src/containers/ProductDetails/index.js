@@ -15,6 +15,7 @@ import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
 import InnerImageZoom from 'react-inner-image-zoom'
 
 export default function ProductDetails(props) {
+    window.sessionStorage.setItem("location", window.location.pathname);
 
     const dispatch = useDispatch();
     const [slider, setSlider] = useState()

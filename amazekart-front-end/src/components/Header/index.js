@@ -162,8 +162,10 @@ export default function Header(props) {
       <div className="header__nav">
       {auth.authenticate ? renderLoggedInMenu() : renderNonLoggedInMenu()}
           <div className="header__option">
-            <span className="header__optionLineOne">Returns</span>
+            <Link to="/account/orders">
+            <span className="header__optionLineOne">Returns</span><br></br>
             <span className="header__optionLineTwo">& Orders</span>
+            </Link>
           </div>
         
         

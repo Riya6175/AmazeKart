@@ -18,6 +18,7 @@ const breakPoints = [
 ];
 
 export default function ProductListPage(props) {
+    window.sessionStorage.setItem("location", window.location.pathname);
 
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product);
@@ -50,7 +51,7 @@ export default function ProductListPage(props) {
                     <div>
                         
                             <div className="cardHeader">
-                            <div>{`${props.match.params.slug} mobile under ${priceRange[key]}`}</div>
+                            <div>{`${props.match.params.slug} ${priceRange[key]}`}</div>
                             
                     </div>
                     <Carousel breakPoints={breakPoints} disableArrowsOnEnd={false} style={{marginBottom:"1%"}}>
