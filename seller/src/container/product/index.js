@@ -12,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import SimpleModal from '../../components/productModal/productdisplay'
+import {deleteProductById} from '../../actions/product.actions';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -74,14 +75,15 @@ export default function ProductDetails(){
             <TableCell className={classes.Heading}>Product Name</TableCell>
 
             <TableCell className={classes.Heading}>
-            <TableSortLabel >
+            
             
               Price
-            </TableSortLabel>
+            
             </TableCell>
             
-            <TableCell className={classes.Heading}><TableSortLabel>Quantity</TableSortLabel></TableCell>
-            <TableCell className={classes.Heading}><TableSortLabel>Category</TableSortLabel></TableCell>
+            <TableCell className={classes.Heading}>Quantity</TableCell>
+            <TableCell className={classes.Heading}>Category</TableCell>
+            <TableCell className={classes.Heading}>Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody style={{background:"#eef9fb"}}>
@@ -97,6 +99,12 @@ export default function ProductDetails(){
               <TableCell className={classes.content}>{product.price}</TableCell>
               <TableCell className={classes.content}>{product.quantity}</TableCell>
               <TableCell className={classes.content}>{product.category.name}</TableCell>
+              <TableCell><button onClick={() => {
+                        const payload = {
+                          productId: product._id,
+                        };
+                        dispatch(deleteProductById(payload));
+                      }}>delete</button></TableCell>
             </TableRow>
             
               {/* <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} className={classes.rowshover} colSpan={6}>

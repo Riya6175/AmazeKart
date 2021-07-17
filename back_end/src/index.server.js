@@ -17,6 +17,7 @@ const cartRoutes = require('./routes/cart')
 const initialDataRoutes = require('./routes/seller/initialData')
 const addressRoutes = require("./routes/address");
 const orderRoutes = require("./routes/order");
+const sellerOrderRoute = require("./routes/seller/order.routes");
 //environment variobles 
 env.config();
 
@@ -50,6 +51,7 @@ app.use("/api",cartRoutes)
 app.use("/api",initialDataRoutes)
 app.use("/api", addressRoutes);
 app.use("/api", orderRoutes);
+app.use("/api",sellerOrderRoute);
 
 app.post(`/api/verify/razorpay-signature`,(req,res) => {
 

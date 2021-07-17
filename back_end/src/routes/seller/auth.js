@@ -10,6 +10,6 @@ const { validateSignupRequest,validateSigninRequest,isRequestValidated } = requi
 
 router.post("/seller/signin",validateSigninRequest,isRequestValidated, signin)
 router.post("/seller/signup",validateSignupRequest,isRequestValidated, signup)
-router.post("/seller/signout", signout)
+//router.post("/seller/signout", signout)
 
 module.exports = router;

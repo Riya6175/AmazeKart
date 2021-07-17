@@ -11,6 +11,7 @@ import Footer from "./components/footer"
 import landing from "./components/landing";
 import Products from "./container/product/product";
 import Category from "./container/category/category";
+import Orders from "./container/Orders";
 
 
 
@@ -18,6 +19,7 @@ function App() {
 
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth)
+  
 
   useEffect(() => {
     if(!auth.authenticate){
@@ -35,7 +37,7 @@ function App() {
           <PrivateRoute path="/products"  component={Products} />
           <PrivateRoute path="/category"  component={Category} />
 
-
+          <PrivateRoute path="/orders" component={Orders} />
           
           <Route path='/' exact component={landing}/>
           <Route path="/signin" component={signin} />

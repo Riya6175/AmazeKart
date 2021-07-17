@@ -14,6 +14,7 @@ import Card from "../../components/UI/Card";
 import "./style.css";
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from "react-router-dom";
+import shortid from "shortid";
 
 /**
  * @author
@@ -182,7 +183,8 @@ const CheckoutPage = (props) => {
       0
     );
 
-    
+    let payId = shortid.generate();
+    setPaymentId(payId);
 
     const items = Object.keys(cart.cartItems).map((key) => ({
       productId: key,

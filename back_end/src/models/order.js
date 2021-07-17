@@ -33,6 +33,11 @@ const orderSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
+        soldBy: {
+          type: mongoose.Schema.Types,
+          ref: "Product.createdBy",
+          required: true,
+        },
       },
     ],
     paymentStatus: {
@@ -61,7 +66,9 @@ const orderSchema = new mongoose.Schema(
         },
       },
     ],
+    
   },
+  
   { timestamps: true }
 );
 
