@@ -13,11 +13,13 @@ const adminRoutes = require('./routes/admin/auth')
 const sellerRoutes = require('./routes/seller/auth')
 const categoryRoutes = require('./routes/category')
 const productRoutes = require('./routes/product')
+const adminProductRoutes = require("./routes/admin/initialdata");
 const cartRoutes = require('./routes/cart')
 const initialDataRoutes = require('./routes/seller/initialData')
 const addressRoutes = require("./routes/address");
 const orderRoutes = require("./routes/order");
 const sellerOrderRoute = require("./routes/seller/order.routes");
+const adminOrderRoute = require("./routes/admin/order.routes");
 //environment variobles 
 env.config();
 
@@ -47,11 +49,13 @@ app.use('/api',adminRoutes)
 app.use('/api',sellerRoutes)
 app.use("/api",categoryRoutes)
 app.use("/api",productRoutes)
+app.use("/api",adminProductRoutes)
 app.use("/api",cartRoutes)
 app.use("/api",initialDataRoutes)
 app.use("/api", addressRoutes);
 app.use("/api", orderRoutes);
 app.use("/api",sellerOrderRoute);
+app.use("/api",adminOrderRoute);
 
 app.post(`/api/verify/razorpay-signature`,(req,res) => {
 

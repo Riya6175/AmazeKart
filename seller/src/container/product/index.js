@@ -1,20 +1,13 @@
 import React,{useState} from 'react'
 import useTable from './useTable'
 import TableBody from '@material-ui/core/TableBody';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
 import SimpleModal from '../../components/productModal/productdisplay'
 import {deleteProductById} from '../../actions/product.actions';
-
-import Typography from '@material-ui/core/Typography';
 
 
 
@@ -60,11 +53,6 @@ export default function ProductDetails(){
     const [open, setOpen] = React.useState(false);
 
 
-    const handleSortRequest = element => {
-          const isAsc = orderBy === element && order === 'asc';
-        setOrder(isAsc ? 'desc' : 'asc');
-        setOrderBy(element);
-    }
 
   return (
     <>

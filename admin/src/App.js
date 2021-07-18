@@ -8,7 +8,7 @@ import PrivateRoute from "./components/HOC/PrivateRoute"
 import {useDispatch , useSelector} from "react-redux"
 import { isUserLoggedIn, getInitialData} from "./actions"
 import Products from "./containers/products/products";
-import Orders from "./containers/orders/orders";
+import Orders from "./containers/orders";
 import Sidebar from "./containers/home/sidebar";
 import Category from "./containers/category/category";
 
