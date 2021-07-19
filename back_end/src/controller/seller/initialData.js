@@ -5,9 +5,6 @@ const express = require("express");
 const app = express();
 var bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({ extended: true }));
 
 function createCategories(categories, parentId = null) {
 
@@ -52,7 +49,7 @@ exports.initialData = async (req, res) => {
       .populate({ path: "category", select: "_id name" })
       .exec();
     const orders = await Order.find({})
-      .populate("items.productId", "name")
+      .populate("items.productId", "name createdBy")
       .exec();
     res.status(200).json({
       categories: createCategories(categories),

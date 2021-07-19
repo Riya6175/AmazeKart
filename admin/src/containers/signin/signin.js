@@ -96,6 +96,7 @@ export default function Signin(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        {console.log(auth.error)}
         <Avatar  className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>

@@ -1,5 +1,6 @@
 import { authConstants, cartConstants } from "./constants";
 import axios from "../helpers/axios";
+import axiosInstance from "../helpers/axios";
 
 // new update signup action
 export const signup = (user) => {

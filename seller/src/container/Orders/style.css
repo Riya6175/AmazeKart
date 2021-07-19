@@ -44,3 +44,11 @@
     font-size: 12px;
     text-transform: capitalize;
 }
+.date{
+    width: 70px;
+    margin-left: 10%;
+}
+.status{
+    width: 70px;
+    margin-left: 20%;
+}

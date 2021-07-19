@@ -105,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   buttons:{
+
     '@media(minWidth: 360px)' : {
         display:"None ",
       }
@@ -151,6 +152,7 @@ const Sidebar = (props) => {
   const renderLoggedInLinks = () => {
     return (
         <Toolbar>
+          
             <Button color="inherit" className="buttons" method="POST" color="#000" onClick={logout}>Log Out</Button>
         </Toolbar>
       
@@ -183,6 +185,7 @@ const Sidebar = (props) => {
           <img src="./images/logo_blue.png" alt="logo" className={classes.logo} />
             AmazeKart &nbsp; &nbsp; &nbsp; &nbsp; Sell Your Products 
           </Typography>
+          <Typography style={{color:"#000",fontSize:"1rem"}}>{auth.user.firstName}</Typography>
             {auth.authenticate ? renderLoggedInLinks() : renderNonLoggedInLinks()}
           
         </Toolbar>

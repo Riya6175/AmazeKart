@@ -91,8 +91,8 @@ export default function Signin(props) {
     // let currlocElements =  document.referrer.split("/"); 
     // let currloc = (currlocElements[3]);
     // //let loc = `/ ${currloc}`
-    // return <Redirect to= {currloc}/>
-      window.history.back();
+    return <Redirect to= {"/"}/>
+      // window.history.back();
     //  window.history.forward()
     //window.history.go(-1);
   }
