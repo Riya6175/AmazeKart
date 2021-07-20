@@ -53,6 +53,8 @@ const Orders = (props) => {
 
   }, [auth.authenticate]);
 
+
+
   const checkValidation = () => {
     order.orders.map((orderItem, index) => (
       orderItem.items.map((item, index) => (
@@ -91,6 +93,7 @@ const Orders = (props) => {
                 {orderItem.items.map((item, index) => (
                   <div className="value" key={index}>
                     {item.productId.name}
+                   
                   </div>
                 ))}
               </div>

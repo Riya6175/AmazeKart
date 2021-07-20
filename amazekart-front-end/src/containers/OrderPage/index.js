@@ -33,7 +33,7 @@ const OrderPage = (props) => {
       <div style={{display:"flex",justifyContent:"center",marginTop:"10%"}}>
         <Link to="/signin">
       <button className="login">Login</button></Link> 
-      <p style={{fontSize:"2rem",marginLeft:"4%"}}> To see Your Orders</p>
+      <p style={{fontSize:"2rem",marginLeft:"4%",marginTop:"0.5%"}}> To see Your Orders</p>
       </div> :
         <>
           <div style={{ maxWidth: "1160px", margin: "5px auto" }}>
@@ -64,8 +64,8 @@ const OrderPage = (props) => {
                         <BiRupee />
                         {item.payablePrice}
                       </div>
-                      <button className="paymentStatus">{order.paymentStatus}</button>
-                      <button className="paymentType">{order.paymentType}</button>
+                      <p className="paymentType">Payment Status: {order.paymentStatus}</p>
+                      <p className="paymentType">Payment Type: {order.paymentType}</p>
                     </div>
                   </Link>
                 </Card>

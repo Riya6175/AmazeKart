@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 
-router.post("/product/addproduct",requireSignin, sellerMiddleware,upload.array("productPicture"), createProduct);
+router.post("/product/create",requireSignin, sellerMiddleware,upload.array("productPicture"), createProduct);
 router.get("/products/:slug",getProductsBySlug)
 router.get("/product/:productId", getProductDetailsById);
 router.delete(

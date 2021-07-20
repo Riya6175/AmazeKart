@@ -8,7 +8,7 @@ import PrivateRoute from "./components/HOC/PrivateRoute"
 import {useDispatch , useSelector} from "react-redux"
 import { isUserLoggedIn,getInitialData} from "./actions"
 import Footer from "./components/footer"
-import landing from "./components/landing";
+import Landing from "./components/landing/landing";
 import Products from "./container/product/product";
 import Category from "./container/category/category";
 import Orders from "./container/Orders";
@@ -39,7 +39,7 @@ function App() {
 
           <PrivateRoute path="/orders" component={Orders} />
           
-          <Route path='/' exact component={landing}/>
+          <Route path='/' exact component={Landing}/>
           <Route path="/signin" component={signin} />
           <Route path="/signup" component={signup} />
         </Switch>

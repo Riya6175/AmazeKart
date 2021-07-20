@@ -85,6 +85,9 @@ const OrderDetailsPage = (props) => {
             <div className="delMoreActionContainer">
               <div className="delTitle">More Actions</div>
               <div className="delName">Download Invoice</div>
+              <div style={{marginTop:"4%",fontSize:"14px"}}>Order Id: {orderDetails._id}</div>
+              {orderDetails.PaymentId != null? <div style={{marginTop:"4%",fontSize:"14px"}}>Payment Id: {orderDetails.paymentId}</div> : null  }
+              
             </div>
           </div>
         </Card>
@@ -100,6 +103,7 @@ const OrderDetailsPage = (props) => {
               <div style={{ width: "250px" }}>
                 <div className="delItemName">{item.productId.name}</div>
                 <Price value={item.payablePrice} />
+                
               </div>
             </div>
             <div style={{ padding: "25px 50px" }}>

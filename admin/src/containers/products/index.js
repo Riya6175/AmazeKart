@@ -65,8 +65,9 @@ export default function ProductDetails(){
             Price
             </TableCell>
             
-            <TableCell className={classes.Heading}><TableSortLabel>Quantity</TableSortLabel></TableCell>
-            <TableCell className={classes.Heading}><TableSortLabel>Category</TableSortLabel></TableCell>
+            <TableCell className={classes.Heading}>Quantity</TableCell>
+            <TableCell className={classes.Heading}>Category</TableCell>
+            <TableCell className={classes.Heading}>Created By</TableCell>
           </TableRow>
         </TableHead>
         <TableBody style={{background:"#E5E4E2"}}>
@@ -82,6 +83,7 @@ export default function ProductDetails(){
               <TableCell className={classes.content}>{product.price}</TableCell>
               <TableCell className={classes.content}>{product.quantity}</TableCell>
               <TableCell className={classes.content}>{product.category.name}</TableCell>
+              <TableCell className={classes.content}>{product.createdBy}</TableCell>
             </TableRow>
             
             

@@ -182,7 +182,7 @@ const Sidebar = (props) => {
             <img src="./images/logo_white.png" alt="logo" className={classes.logo} />
             AmazeKart - Admin 
           </Typography>
-          <Typography style={{color:"#000",fontSize:"1rem"}}>{auth.user.firstName}</Typography>
+          <Typography style={{color:"#fff",fontSize:"1rem"}}>{auth.user.firstName}</Typography>
           <Button color="inherit" className="buttons" method="POST" onClick={logout}>Log Out</Button>
           
         </Toolbar>

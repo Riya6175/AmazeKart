@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import clsx from 'clsx';
+import { Redirect } from 'react-router';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -138,6 +139,7 @@ const Sidebar = (props) => {
 
   const logout = () => {
         dispatch(signout());
+        <Redirect to="/"></Redirect>
   }
 
   const renderNonLoggedInLinks = () => {

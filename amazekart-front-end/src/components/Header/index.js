@@ -150,12 +150,12 @@ export default function Header(props) {
         <Link to = "/" >
         <div className='logo_name' style={{color:'#fff',padding:'2% 2% 2% 0',fontSize:'1.5rem',fontWeight:'bold'}}> AmazeKart </div>
         </Link>
-      <div className="header__search">
+      <div className="header__search1">
         <select className="header_categories" name="categories">
           <option>All</option>
            {category.categories.length > 0 ? renderCategories(category.categories): null }
         </select>
-        <input className="header__searchInput" type="text" />
+        <input className="header__searchInput1" type="text" />
         <SearchIcon className="header__searchIcon" />
       </div>
 

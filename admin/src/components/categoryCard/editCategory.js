@@ -115,11 +115,13 @@ export default function EditCategory() {
         return options;
     }
 
-
+    const updateCategoriesss = () => {
+        updateCategory();
+    }
 
 
     const updateCategory = () => {
-        setUpdateCategoryModal(true);
+        
         const categories = createCategoryList(category.categories)
         const checkedArray = [];
         const expandedArray = [];
@@ -299,11 +301,10 @@ export default function EditCategory() {
                             <AddCircleIcon style={{ padding: '2%', color: '#fff' }} /> Upload photo
                         </Fab>
                     </label> */}
-                    <Button autoFocus color="inherit" style={{ width: "10%", marginLeft: "5%",marginTop:"2%", background: "#4b5563", color: "#fff" }} onClick={updateCategory} >
+                    <Button autoFocus color="inherit" style={{ width: "10%", marginLeft: "5%",marginTop:"2%", background: "#4b5563", color: "#fff" }} onClick={updateCategoriesss} >
                     Edit
                 </Button>
                 </List>
-
                 
             </Dialog>
         </div>

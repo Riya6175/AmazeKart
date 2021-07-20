@@ -72,7 +72,7 @@ const Orders = (props) => {
                 {orderItem.items.map((item, index) => (
                 <div className="value" key={index}>
                   {item.productId.name}
-                 
+                  <h4>Product By: {item.productId.createdBy}</h4> 
                 </div>
               ))}
               </div>
